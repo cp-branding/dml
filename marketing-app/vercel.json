@@ -1,16 +1,7 @@
 {
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    {
-      "src": "/",
-      "has": [{ "type": "cookie", "key": "mk_session" }],
-      "dest": "/marketing-kurs-komplett.html"
-    },
-    {
-      "src": "/(.*\\.html)",
-      "has": [{ "type": "cookie", "key": "mk_session" }],
-      "dest": "/$1"
-    },
-    { "src": "/(.*)", "dest": "/login.html" }
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/", "destination": "/public/login.html" },
+    { "source": "/(.*)", "destination": "/public/$1" }
   ]
 }
