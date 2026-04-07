@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Problem-Kompass</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-from: #f0f4ff;
+  --bg-to: #f8f0ff;
+  --glass: rgba(255,255,255,0.75);
+  --glass-border: rgba(255,255,255,0.95);
+  --accent: #4A6CF7;
+  --accent2: #7C3AED;
+  --accent-light: #eef2ff;
+  --text: #111827;
+  --muted: #6b7280;
+  --light: #9ca3af;
+  --border: rgba(180,190,230,0.45);
+  --radius: 18px;
+  --radius-sm: 11px;
+  --success: #059669;
+  --success-bg: #ecfdf5;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(145deg, var(--bg-from) 0%, var(--bg-to) 100%);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--text);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -30%; left: -15%;
+  width: 55%; height: 55%;
+  background: radial-gradient(circle, rgba(74,108,247,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%; right: -10%;
+  width: 45%; height: 45%;
+  background: radial-gradient(circle, rgba(124,58,237,0.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ── HEADER ── */
+header {
+  padding: 16px 22px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.compass-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.header-copy h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.header-copy p {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.phase-indicator {
+  margin-left: auto;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.phase-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.3s;
+}
+.phase-dot.active { background: var(--accent); }
+.phase-dot.done   { background: var(--success); }
+
+/* ── CHAT ── */
+#chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+  position: relative;
+  z-index: 1;
+}
+
+#chat::-webkit-scrollbar { width: 4px; }
+#chat::-webkit-scrollbar-thumb { background: rgba(74,108,247,0.18); border-radius: 3px; }
+
+.msg { display: flex; gap: 10px; animation: fadeUp 0.28s ease; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.msg.user { flex-direction: row-reverse; }
+
+.av {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600;
+  flex-shrink: 0; margin-top: 2px;
+}
+
+.msg.bot .av {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+}
+
+.msg.user .av {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.bbl {
+  max-width: 76%;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.68;
+}
+
+.msg.bot .bbl {
+  background: rgba(255,255,255,0.88);
+  border: 1px solid var(--glass-border);
+  border-radius: 4px 16px 16px 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  color: var(--text);
+}
+
+.msg.user .bbl {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 16px 4px 16px 16px;
+  color: white;
+  box-shadow: 0 4px 14px rgba(74,108,247,0.28);
+}
+
+.bbl strong { font-weight: 600; }
+.msg.bot .bbl strong { color: var(--accent); }
+.msg.user .bbl strong { color: rgba(255,255,255,0.92); }
+.bbl em { font-style: italic; color: var(--accent2); }
+.msg.user .bbl em { color: rgba(255,255,255,0.85); }
+
+/* ── MODULE RECOMMENDATION CARDS ── */
+.rec-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.rec-card {
+  background: white;
+  border: 1px solid rgba(74,108,247,0.18);
+  border-radius: var(--radius-sm);
+  padding: 13px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: box-shadow 0.18s, transform 0.18s;
+  cursor: default;
+}
+
+.rec-card:hover {
+  box-shadow: 0 4px 18px rgba(74,108,247,0.14);
+  transform: translateY(-1px);
+}
+
+.rec-card.primary {
+  border-color: rgba(74,108,247,0.4);
+  background: linear-gradient(135deg, rgba(74,108,247,0.04), rgba(124,58,237,0.04));
+}
+
+.rec-num {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rec-card.primary .rec-num {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+}
+
+.rec-body { flex: 1; min-width: 0; }
+
+.rec-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 3px;
+}
+
+.rec-card.primary .rec-tag { color: var(--accent2); }
+
+.rec-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.rec-why {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── TYPING ── */
+.typing-wrap { display: flex; gap: 10px; align-items: flex-start; }
+
+.typing-bbl {
+  background: rgba(255,255,255,0.88);
+  border: 1px solid var(--glass-border);
+  border-radius: 4px 16px 16px 16px;
+  backdrop-filter: blur(8px);
+  padding: 14px 16px;
+  display: flex; gap: 5px; align-items: center;
+}
+
+.td {
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.45;
+  animation: tdp 1.2s ease infinite;
+}
+.td:nth-child(2) { animation-delay: .2s; }
+.td:nth-child(3) { animation-delay: .4s; }
+
+@keyframes tdp {
+  0%,80%,100% { transform: translateY(0); opacity: .4; }
+  40%          { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 13px 20px 17px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.input-row { display: flex; gap: 9px; align-items: flex-end; }
+
+textarea#inp {
+  flex: 1;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 11px 14px;
+  resize: none;
+  min-height: 44px;
+  max-height: 110px;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+textarea#inp:focus {
+  border-color: rgba(74,108,247,0.4);
+  box-shadow: 0 0 0 3px rgba(74,108,247,0.07);
+}
+
+textarea#inp::placeholder { color: var(--light); }
+
+#sndBtn {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity .15s, transform .1s;
+}
+
+#sndBtn:hover { opacity: .9; }
+#sndBtn:active { transform: scale(.95); }
+#sndBtn:disabled { background: #d1d5db; cursor: not-allowed; }
+
+.hint {
+  font-size: 11px;
+  color: var(--light);
+  text-align: center;
+  margin-top: 7px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="compass-icon">🧭</div>
+  <div class="header-copy">
+    <h1>Problem-Kompass</h1>
+    <p>Beschreib kurz was nicht läuft — ich leite her welches Modul hilft.</p>
+  </div>
+  <div class="phase-indicator">
+    <div class="phase-dot active" id="pd0"></div>
+    <div class="phase-dot" id="pd1"></div>
+    <div class="phase-dot" id="pd2"></div>
+    <div class="phase-dot" id="pd3"></div>
+  </div>
+</header>
+
+<div id="chat"></div>
+
+<footer>
+  <div class="input-row">
+    <textarea id="inp" placeholder="Schreib drauf los …" rows="1"></textarea>
+    <button id="sndBtn" onclick="send()">↑</button>
+  </div>
+  <div class="hint">Enter senden · Shift+Enter neue Zeile</div>
+</footer>
+
+<script>
+// ─── API KEY — hier deinen Key eintragen ─────────────────────────────────────
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+const SYSTEM = `Du bist der Diagnose-Coach hinter Constantins Marketing-Kurs. Deine Aufgabe: das echte Kernproblem verstehen — und dann herleiten welches Modul wirklich hilft. Nicht raten. Herleiten.
+
+Du klingst wie Constantin: direkt, warm, ohne Aufwärmen. "Halt" kommt natürlich. Du mischst Deutsch und Englisch wenn es passt. Du zeigst Unsicherheit wenn du sie hast. Kein Hochglanz, kein Corporate-Bla. Keine Motivationssprache.
+
+KURSINHALT (kenne das auswendig — das ist die Basis für deine Empfehlung):
+- Modul 0: Orientierung — Marketing-Selbstaudit, Ausgangssituation erfassen
+- Modul 1: Was ist Marketing? — Funnel-Grundlagen, Strategie vs. Taktik, warum Leute Geld verbrennen
+- Modul 2: Vertrauen & Branding — Positionierung, Personal/Corporate/Employer Branding, Markenbotschaft
+- Modul 3: ICP + No-Brainer Offer — Wunschkunde, Jobs-to-be-Done, Angebot das sich von selbst verkauft
+- Modul 4: Sichtbarkeit: Das Framework — Paid vs. Organic, TOFU/MOFU/BOFU, Retargeting-Logik
+- Modul 5: Paid Media — Meta, Google, LinkedIn, TikTok/YouTube, Budget-Allokation, Benchmarks
+- Modul 6: Organic & Content Marketing — SEO, Content-Strategie, Plattformen, Repurposing
+- Modul 7: Alle Kanäle im Überblick — Email/Newsletter, CRM, Influencer, Affiliate, PR, Events, Community
+- Modul 8: Analytics & Messung — KPIs vs. Vanity Metrics, CAC, CLV, ROAS, Tracking-Setup, A/B-Testing
+- Modul 9: Mediengestaltung & Content-Produktion — DIY vs. Profi, Nutzungsrechte, Website, Agenturen
+- Modul 10: B2B-Marketing — Sales Cycles, LinkedIn, Account-Based Marketing, Thought Leadership
+- Modul 11: B2C-Marketing — Impulskauf vs. Überlegter Kauf, E-Commerce Funnel, Influencer, CRO
+- Modul 12: Master-Strategie — Alle Erkenntnisse zu einem 90-Tage-Plan zusammenführen
+
+ABLAUF — exakt 3 Phasen:
+
+PHASE 1 — PROBLEM ERFASSEN (1 Frage):
+Direkt fragen was nicht läuft. Kein Aufwärmen. "Moin, was läuft gerade nicht rund?" reicht.
+
+PHASE 2 — URSACHE VERSTEHEN (1-2 Warum-Fragen):
+Tiefer gehen. Nämlich: das was jemand als Problem beschreibt ist oft nicht das eigentliche Problem. Frag nach.
+Zum Beispiel:
+- "Hast du das schon probiert — und was ist passiert?"
+- "Woran merkst du das konkret?"
+- "Ist das ein Problem mit dem Angebot, dem Kanal, oder der Botschaft — oder weißt du das noch nicht?"
+
+PHASE 3 — DIAGNOSE & MODULEMPFEHLUNG:
+Wenn du das Problem verstehst: kurze Diagnose, dann 2-3 Modul-Empfehlungen. Herleiten warum — nicht behaupten.
+
+Deine Empfehlung muss dieses JSON-Format am Ende enthalten — EXAKT so, damit die UI es parsen kann:
+
+[EMPFEHLUNG]
+{
+  "diagnose": "Kurze Diagnose in 1-2 Sätzen — was ist das eigentliche Problem?",
+  "module": [
+    {
+      "num": 2,
+      "priority": "primary",
+      "title": "Vertrauen & Branding",
+      "warum": "Weil... (konkret auf diese Situation bezogen, nicht generisch)"
+    },
+    {
+      "num": 3,
+      "priority": "secondary",
+      "title": "ICP + No-Brainer Offer",
+      "warum": "Weil..."
+    }
+  ]
+}
+[/EMPFEHLUNG]
+
+WICHTIG:
+- Maximal 4 Fragen insgesamt — dann Empfehlung
+- Direkt, kein Bullshit. Kein "Danke für deine Antwort!"
+- Fragen kurz — ein, zwei Sätze max
+- Kein CTA der sich erzwungen anfühlt
+- Die [EMPFEHLUNG]-Tags werden von der UI geparst — immer exakt dieses Format
+- Antworte auf Deutsch`;
+
+let msgs = [];
+let phase = 0;
+let questionCount = 0;
+
+function setPhase(p) {
+  phase = p;
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('pd' + i);
+    if (i < p) el.className = 'phase-dot done';
+    else if (i === p) el.className = 'phase-dot active';
+    else el.className = 'phase-dot';
+  }
+}
+
+function parseRecommendation(text) {
+  const match = text.match(/\[EMPFEHLUNG\]([\s\S]*?)\[\/EMPFEHLUNG\]/);
+  if (!match) return null;
+  try { return JSON.parse(match[1].trim()); } catch { return null; }
+}
+
+function stripRecommendationBlock(text) {
+  return text.replace(/\[EMPFEHLUNG\][\s\S]*?\[\/EMPFEHLUNG\]/g, '').trim();
+}
+
+function renderMsg(role, text) {
+  const chat = document.getElementById('chat');
+  const rec = role === 'bot' ? parseRecommendation(text) : null;
+  const cleanText = rec ? stripRecommendationBlock(text) : text;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'msg ' + role;
+
+  const av = document.createElement('div');
+  av.className = 'av';
+  av.textContent = role === 'bot' ? '🧭' : '👤';
+
+  const bbl = document.createElement('div');
+  bbl.className = 'bbl';
+  bbl.innerHTML = fmt(cleanText);
+
+  if (rec) {
+    // Diagnose box
+    if (rec.diagnose) {
+      const diag = document.createElement('div');
+      diag.style.cssText = 'margin-top:14px;padding:12px 14px;background:linear-gradient(135deg,rgba(74,108,247,0.07),rgba(124,58,237,0.07));border:1px solid rgba(74,108,247,0.2);border-radius:10px;';
+      diag.innerHTML = `<div style="font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#7C3AED;margin-bottom:6px;">🔍 Das eigentliche Problem</div><div style="font-size:13.5px;line-height:1.6;color:#111827;">${fmt(rec.diagnose)}</div>`;
+      bbl.appendChild(diag);
+    }
+
+    // Module cards
+    if (rec.module && rec.module.length) {
+      const cards = document.createElement('div');
+      cards.className = 'rec-cards';
+
+      rec.module.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'rec-card' + (m.priority === 'primary' ? ' primary' : '');
+
+        const tag = m.priority === 'primary' ? '★ Hier anfangen' : 'Auch relevant';
+
+        card.innerHTML = `
+          <div class="rec-num">${m.num}</div>
+          <div class="rec-body">
+            <div class="rec-tag">${tag}</div>
+            <div class="rec-title">Modul ${m.num} · ${m.title}</div>
+            <div class="rec-why">${m.warum}</div>
+          </div>`;
+        cards.appendChild(card);
+      });
+
+      bbl.appendChild(cards);
+      setPhase(3);
+    }
+  }
+
+  wrap.appendChild(av);
+  wrap.appendChild(bbl);
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function fmt(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+}
+
+function showTyping() {
+  const chat = document.getElementById('chat');
+  const w = document.createElement('div');
+  w.id = 'typing';
+  w.className = 'msg bot typing-wrap';
+  const av = document.createElement('div');
+  av.className = 'av';
+  av.textContent = '🧭';
+  const b = document.createElement('div');
+  b.className = 'typing-bbl';
+  b.innerHTML = '<div class="td"></div><div class="td"></div><div class="td"></div>';
+  w.appendChild(av);
+  w.appendChild(b);
+  chat.appendChild(w);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+async function callClaude() {
+  showTyping();
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1200,
+        system: SYSTEM,
+        messages: msgs
+      })
+    });
+    const data = await res.json();
+    removeTyping();
+    const reply = data.content?.[0]?.text || 'Entschuldigung, ein Fehler ist aufgetreten.';
+    msgs.push({ role: 'assistant', content: reply });
+    renderMsg('bot', reply);
+
+    // Update phase based on question count
+    questionCount++;
+    if (questionCount === 1) setPhase(1);
+    else if (questionCount === 2) setPhase(2);
+
+  } catch {
+    removeTyping();
+    renderMsg('bot', '⚠️ Verbindungsfehler. Bitte versuche es erneut.');
+  }
+  document.getElementById('sndBtn').disabled = false;
+}
+
+async function send() {
+  const inp = document.getElementById('inp');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  inp.style.height = 'auto';
+  document.getElementById('sndBtn').disabled = true;
+  msgs.push({ role: 'user', content: text });
+  renderMsg('user', text);
+  await callClaude();
+}
+
+// Init
+async function init() {
+  document.getElementById('sndBtn').disabled = true;
+  msgs.push({ role: 'user', content: 'Starte. Begrüß mich in einem Satz — direkt, kein Aufwärmen — und frag sofort was nicht läuft.' });
+  showTyping();
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: SYSTEM,
+        messages: msgs
+      })
+    });
+    const data = await res.json();
+    removeTyping();
+    const reply = data.content?.[0]?.text || 'Hey! Was läuft bei deinem Marketing gerade nicht rund?';
+    msgs.push({ role: 'assistant', content: reply });
+    renderMsg('bot', reply);
+    setPhase(0);
+  } catch {
+    removeTyping();
+    renderMsg('bot', 'Hey — was läuft bei deinem Marketing gerade nicht rund?');
+  }
+  document.getElementById('sndBtn').disabled = false;
+}
+
+const inp = document.getElementById('inp');
+inp.addEventListener('input', () => {
+  inp.style.height = 'auto';
+  inp.style.height = Math.min(inp.scrollHeight, 110) + 'px';
+});
+inp.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+});
+
+init();
+</script>
+</body>
+</html>
