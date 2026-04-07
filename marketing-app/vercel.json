@@ -1,5 +1,10 @@
 {
   "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "cookie", "key": "mk_session" }],
+      "destination": "/marketing-kurs-komplett.html"
+    },
     { "source": "/login", "destination": "/login.html" },
     { "source": "/", "destination": "/login.html" }
   ]
