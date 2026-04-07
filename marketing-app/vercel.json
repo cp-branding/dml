@@ -4,13 +4,13 @@
     {
       "src": "/",
       "has": [{ "type": "cookie", "key": "mk_session" }],
-      "dest": "/public/marketing-kurs-komplett.html"
+      "dest": "/marketing-kurs-komplett.html"
     },
     {
       "src": "/(.*\\.html)",
       "has": [{ "type": "cookie", "key": "mk_session" }],
-      "dest": "/public/$1"
+      "dest": "/$1"
     },
-    { "src": "/(.*)", "dest": "/public/login.html" }
+    { "src": "/(.*)", "dest": "/login.html" }
   ]
 }
