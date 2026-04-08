@@ -86,11 +86,23 @@ body {
   max-width: 900px;
 }
 
-.select-header .wordmark {
-  height: 36px;
+.select-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.select-logo-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.select-logo-wordmark {
+  height: 40px;
   width: auto;
-  margin-bottom: 10px;
-  mix-blend-mode: multiply;
   filter: invert(1);
 }
 
@@ -414,7 +426,7 @@ body {
   height: 16px;
   width: auto;
   filter: invert(1);
-  opacity: 0.75;
+  opacity: 0.85;
 }
 .header-module {
   font-size: 10.5px;
@@ -930,8 +942,10 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
 <!-- ═══════ MODULE SELECTOR ═══════ -->
 <div id="moduleSelect">
   <div class="select-header">
-    <img src="/dml_wordmark.png" alt="DML" class="wordmark">
-    <h1>Dein Marketing-Kurs</h1>
+    <div class="select-logo">
+      <img src="/dml_favicon.png" alt="DML" class="select-logo-icon">
+      <img src="/dml_wordmark.png" alt="DML" class="select-logo-wordmark">
+    </div>
     <p>Kein Selbststudium. Jedes Modul fragt dich — und passt sich an was du sagst.</p>
     <button class="logout-btn" onclick="window.location.href='/api/logout'">Ausloggen</button>
   </div>
