@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marketing-Kurs Coach</title>
+<link rel="icon" type="image/png" href="/dml_favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,6 +84,14 @@ body {
   margin-bottom: 28px;
   width: 100%;
   max-width: 900px;
+}
+
+.select-header .wordmark {
+  height: 36px;
+  width: auto;
+  margin-bottom: 10px;
+  mix-blend-mode: multiply;
+  filter: invert(1);
 }
 
 .select-header h1 {
@@ -378,6 +387,35 @@ body {
 .back-btn:hover { background: white; color: var(--text); border-color: var(--accent-border); }
 
 .header-info { flex: 1; min-width: 0; }
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+  margin-left: 4px;
+}
+.header-logo-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.header-logo-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.header-logo-wordmark {
+  height: 16px;
+  width: auto;
+  filter: invert(1);
+  opacity: 0.75;
+}
 .header-module {
   font-size: 10.5px;
   font-weight: 700;
@@ -402,7 +440,7 @@ body {
 .view-toggle {
   display: flex;
   gap: 4px;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.45);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
   padding: 3px;
@@ -410,24 +448,26 @@ body {
   flex-shrink: 0;
 }
 .toggle-btn {
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: var(--radius-xs);
   border: none;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  color: var(--text-muted);
+  transition: all 0.22s ease;
+  color: var(--text-light);
   background: transparent;
   white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 .toggle-btn.active {
-  background: white;
-  color: var(--text);
-  box-shadow: 0 2px 8px rgba(80,100,180,0.12);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  color: white;
+  box-shadow: 0 3px 12px rgba(74,108,247,0.35), 0 1px 3px rgba(74,108,247,0.2);
+  font-weight: 600;
 }
-.toggle-btn:not(.active):hover { color: var(--text); background: rgba(255,255,255,0.6); }
+.toggle-btn:not(.active):hover { color: var(--text); background: rgba(255,255,255,0.7); }
 
 /* Kompass dots */
 .kp-dot {
@@ -494,6 +534,15 @@ body {
   border-right: 1px solid var(--border);
   overflow: hidden;
   flex-shrink: 0;
+  transition: width 0.3s ease;
+}
+/* Video-Modus: Video nimmt alles, Chat verschwindet */
+#chatInterface.video-mode #videoPanel {
+  width: 100%;
+  border-right: none;
+}
+#chatInterface.video-mode .chat-column {
+  display: none;
 }
 
 .video-container {
@@ -881,6 +930,7 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
 <!-- ═══════ MODULE SELECTOR ═══════ -->
 <div id="moduleSelect">
   <div class="select-header">
+    <img src="/dml_wordmark.png" alt="DML" class="wordmark">
     <h1>Dein Marketing-Kurs</h1>
     <p>Kein Selbststudium. Jedes Modul fragt dich — und passt sich an was du sagst.</p>
     <button class="logout-btn" onclick="window.location.href='/api/logout'">Ausloggen</button>
@@ -922,11 +972,15 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
       <div class="header-module" style="color:#7C3AED;">🧭 Kompass</div>
       <div class="header-title">Problem eingrenzen</div>
     </div>
-    <div style="display:flex;gap:5px;align-items:center;margin-left:auto;">
+    <div style="display:flex;gap:5px;align-items:center;">
       <div class="kp-dot active" id="kpd0"></div>
       <div class="kp-dot" id="kpd1"></div>
       <div class="kp-dot" id="kpd2"></div>
       <div class="kp-dot" id="kpd3"></div>
+    </div>
+    <div class="header-logo">
+      <div class="header-logo-icon"><img src="/dml_favicon.png" alt="DML"></div>
+      <img src="/dml_wordmark.png" alt="DML" class="header-logo-wordmark">
     </div>
   </div>
   <div id="kompassChat"></div>
@@ -953,6 +1007,10 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
     <div class="view-toggle" id="viewToggle">
       <button class="toggle-btn active" id="btnChat" onclick="setView('chat')">💬 Chat</button>
       <button class="toggle-btn" id="btnVideo" onclick="setView('video')">▶ Video</button>
+    </div>
+    <div class="header-logo">
+      <div class="header-logo-icon"><img src="/dml_favicon.png" alt="DML"></div>
+      <img src="/dml_wordmark.png" alt="DML" class="header-logo-wordmark">
     </div>
   </div>
 
@@ -1017,14 +1075,17 @@ let currentView = 'chat';
 function setView(mode) {
   currentView = mode;
   const vp = document.getElementById('videoPanel');
+  const ci = document.getElementById('chatInterface');
   const btnChat = document.getElementById('btnChat');
   const btnVideo = document.getElementById('btnVideo');
   if (mode === 'video') {
     vp.style.display = 'flex';
+    ci.classList.add('video-mode');
     btnChat.classList.remove('active');
     btnVideo.classList.add('active');
   } else {
     vp.style.display = 'none';
+    ci.classList.remove('video-mode');
     btnChat.classList.add('active');
     btnVideo.classList.remove('active');
   }
