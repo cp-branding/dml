@@ -10,8 +10,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --accent: #4A6CF7;
-  --accent2: #7C3AED;
+  --accent: #E8451A;
+  --accent2: #F07530;
   --text: #1a1a2e;
   --muted: #6b7280;
   --light: #9ca3af;
@@ -23,7 +23,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(145deg, #e8eeff 0%, #f3e8ff 50%, #e8f4ff 100%);
+  background: linear-gradient(145deg, #fdf0ec 0%, #fce8e0 50%, #fdf5f0 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -37,7 +37,7 @@ body::before {
   position: fixed;
   top: -20%; left: -10%;
   width: 55%; height: 55%;
-  background: radial-gradient(circle, rgba(74,108,247,0.12) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(232,69,26,0.12) 0%, transparent 65%);
   pointer-events: none;
 }
 body::after {
@@ -45,7 +45,7 @@ body::after {
   position: fixed;
   bottom: -20%; right: -10%;
   width: 45%; height: 45%;
-  background: radial-gradient(circle, rgba(124,58,237,0.10) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(240,117,48,0.10) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -58,7 +58,7 @@ body::after {
   padding: 44px 40px;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 8px 40px rgba(74,108,247,0.12);
+  box-shadow: 0 8px 40px rgba(232,69,26,0.12);
   position: relative;
   z-index: 1;
 }
@@ -138,8 +138,8 @@ input[type="password"] {
 
 input[type="email"]:focus,
 input[type="password"]:focus {
-  border-color: rgba(74,108,247,0.45);
-  box-shadow: 0 0 0 3px rgba(74,108,247,0.08);
+  border-color: rgba(232,69,26,0.45);
+  box-shadow: 0 0 0 3px rgba(232,69,26,0.08);
 }
 
 input[type="email"]::placeholder,
