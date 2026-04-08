@@ -836,6 +836,86 @@ body {
 .master-btn:hover { opacity: 0.92; }
 .master-btn:active { transform: scale(0.98); }
 
+/* ── CONTEXT INPUT ── */
+.context-input-section {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 20px 20px 0;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-sm);
+}
+.context-input-section .ctx-icon {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.context-input-section .ctx-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.context-input-section .ctx-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.context-input-section .ctx-textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text);
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.context-input-section .ctx-textarea:focus {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px rgba(74,108,247,0.07);
+}
+.context-input-section .ctx-textarea::placeholder { color: var(--text-light); }
+.ctx-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+.ctx-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  border: none;
+  padding: 9px 18px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity 0.15s, transform 0.1s;
+  box-shadow: 0 6px 20px rgba(74,108,247,0.25);
+}
+.ctx-btn:hover { opacity: 0.92; }
+.ctx-btn:active { transform: scale(0.98); }
+.ctx-skip {
+  font-size: 12px;
+  color: var(--text-light);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+  transition: color 0.2s;
+}
+.ctx-skip:hover { color: var(--text-muted); }
+
 /* ── FOOTER ── */
 footer {
   padding: 12px 20px 16px;
@@ -1044,6 +1124,19 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
 
     <!-- CHAT COLUMN -->
     <div class="chat-column">
+      <div id="contextInputSection" style="display:none;">
+        <div class="context-input-section">
+          <div class="ctx-icon">📎</div>
+          <div class="ctx-title">Hast du Kontextmaterial?</div>
+          <div class="ctx-sub">Website, Positionierung, Strategie-Notizen, Zielgruppe — alles was der Coach wissen soll. Einfach reinkopieren. Oder überspringen.</div>
+          <textarea class="ctx-textarea" id="contextInput" placeholder="z.B. Website-Text, ICP-Beschreibung, bisherige Strategie, Produkte …"></textarea>
+          <div class="ctx-actions">
+            <button class="ctx-btn" onclick="startWithContext()">Mit Kontext starten →</button>
+            <button class="ctx-skip" onclick="skipContext()">Überspringen</button>
+          </div>
+        </div>
+      </div>
+
       <div id="masterInputSection" style="display:none;">
         <div class="master-input-section">
           <label>Deine Modul-Zusammenfassungen (0–11) hier reinkopieren</label>
@@ -1265,14 +1358,39 @@ function openModule(mod) {
     initChat();
   } else {
     masterSection.style.display = 'none';
-    footer.style.display = 'block';
+    const ctxSection = document.getElementById('contextInputSection');
     const saved = getChat(mod.num);
     if (saved && saved.msgs.length > 1) {
+      // Already has a chat — restore directly, skip context prompt
+      ctxSection.style.display = 'none';
+      footer.style.display = 'block';
       restoreChat(saved);
     } else {
-      initChat();
+      // New session — show context input first
+      ctxSection.style.display = 'block';
+      document.getElementById('contextInput').value = '';
+      footer.style.display = 'none';
     }
   }
+}
+
+function startWithContext() {
+  const ctx = document.getElementById('contextInput').value.trim();
+  document.getElementById('contextInputSection').style.display = 'none';
+  document.querySelector('#chatInterface footer').style.display = 'block';
+  if (ctx) {
+    // Prepend context to system prompt for this session
+    const originalPrompt = currentModule.systemPrompt;
+    currentModule._runtimePrompt = `KONTEXT ÜBER DEN KURSTEILNEHMER (vor der Session eingereicht):\n---\n${ctx}\n---\n\n${originalPrompt}`;
+  }
+  initChat();
+}
+
+function skipContext() {
+  document.getElementById('contextInputSection').style.display = 'none';
+  document.querySelector('#chatInterface footer').style.display = 'block';
+  currentModule._runtimePrompt = null;
+  initChat();
 }
 
 async function startMaster() {
@@ -1305,7 +1423,7 @@ async function initChat() {
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: currentModule.systemPrompt, messages: [{ role: 'user', content: initMsg }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: currentModule._runtimePrompt || currentModule.systemPrompt, messages: [{ role: 'user', content: initMsg }] })
     });
     const data = await res.json();
     removeTyping();
@@ -1405,7 +1523,7 @@ async function fetchReply() {
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, system: currentModule.systemPrompt, messages })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, system: currentModule._runtimePrompt || currentModule.systemPrompt, messages })
     });
     const data = await res.json();
     removeTyping();
