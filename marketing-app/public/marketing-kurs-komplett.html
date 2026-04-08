@@ -10,29 +10,29 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F0F0F8;
+  --bg: #F6F1EF;
   --glass: rgba(255,255,255,0.62);
   --glass-hover: rgba(255,255,255,0.78);
   --glass-border: rgba(255,255,255,0.88);
   --glass-border-subtle: rgba(255,255,255,0.55);
-  --shadow-sm: 0 4px 16px rgba(80,100,180,0.07), inset 0 1px 1px rgba(255,255,255,0.9);
-  --shadow-md: 0 8px 32px rgba(80,100,180,0.10), inset 0 1px 2px rgba(255,255,255,0.9);
-  --shadow-lg: 0 20px 60px rgba(80,100,180,0.13), inset 0 1px 2px rgba(255,255,255,0.95);
-  --shadow-float: 0 32px 80px rgba(80,100,180,0.16), 0 8px 24px rgba(80,100,180,0.08);
-  --accent: #4A6CF7;
-  --accent2: #7C3AED;
-  --accent-light: rgba(74,108,247,0.08);
-  --accent-border: rgba(74,108,247,0.2);
+  --shadow-sm: 0 4px 16px rgba(160,60,20,0.07), inset 0 1px 1px rgba(255,255,255,0.9);
+  --shadow-md: 0 8px 32px rgba(160,60,20,0.10), inset 0 1px 2px rgba(255,255,255,0.9);
+  --shadow-lg: 0 20px 60px rgba(160,60,20,0.13), inset 0 1px 2px rgba(255,255,255,0.95);
+  --shadow-float: 0 32px 80px rgba(160,60,20,0.16), 0 8px 24px rgba(160,60,20,0.08);
+  --accent: #E8451A;
+  --accent2: #F07530;
+  --accent-light: rgba(232,69,26,0.08);
+  --accent-border: rgba(232,69,26,0.2);
   --text: #0F1120;
   --text-muted: #5C6080;
-  --text-light: #9299B8;
-  --border: rgba(180,190,230,0.35);
+  --text-light: #9E9898;
+  --border: rgba(200,160,140,0.3);
   --radius-xs: 8px;
   --radius-sm: 12px;
   --radius: 18px;
   --radius-lg: 24px;
   --radius-xl: 32px;
-  --user-bg: linear-gradient(135deg, #4A6CF7 0%, #7C3AED 100%);
+  --user-bg: linear-gradient(135deg, #E8451A 0%, #C83010 100%);
 }
 
 body {
@@ -57,8 +57,8 @@ body {
   filter: blur(120px);
   opacity: 0.55;
 }
-.bg-blob-1 { top:-20%; left:-15%; width:70vw; height:70vw; background: radial-gradient(circle, rgba(74,108,247,0.22) 0%, transparent 70%); }
-.bg-blob-2 { bottom:-25%; right:-15%; width:65vw; height:65vw; background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%); }
+.bg-blob-1 { top:-20%; left:-15%; width:70vw; height:70vw; background: radial-gradient(circle, rgba(232,69,26,0.18) 0%, transparent 70%); }
+.bg-blob-2 { bottom:-25%; right:-15%; width:65vw; height:65vw; background: radial-gradient(circle, rgba(240,140,60,0.14) 0%, transparent 70%); }
 .bg-blob-3 { top:30%; left:30%; width:50vw; height:50vw; background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, transparent 70%); filter: blur(80px); opacity: 0.9; }
 
 /* ═══════════════════════════════════════════════
@@ -77,7 +77,7 @@ body {
 
 #moduleSelect::-webkit-scrollbar { width: 4px; }
 #moduleSelect::-webkit-scrollbar-track { background: transparent; }
-#moduleSelect::-webkit-scrollbar-thumb { background: rgba(74,108,247,0.15); border-radius: 4px; }
+#moduleSelect::-webkit-scrollbar-thumb { background: rgba(232,69,26,0.15); border-radius: 4px; }
 
 .select-header {
   text-align: center;
@@ -201,8 +201,8 @@ body {
 }
 
 .module-card.master {
-  background: linear-gradient(135deg, rgba(74,108,247,0.07), rgba(124,58,237,0.07));
-  border-color: rgba(74,108,247,0.25);
+  background: linear-gradient(135deg, rgba(232,69,26,0.07), rgba(240,117,48,0.07));
+  border-color: rgba(232,69,26,0.25);
 }
 .module-card.master::after { opacity: 1; }
 .module-card.master .module-num { color: var(--accent2); }
@@ -274,6 +274,7 @@ body {
   background: linear-gradient(90deg, #10b981, #059669);
 }
 
+
 /* Kompass banner */
 .kompass-banner {
   width: 100%;
@@ -321,8 +322,8 @@ body {
 .modul0-banner {
   width: 100%;
   max-width: 900px;
-  background: linear-gradient(135deg, rgba(16,185,129,0.07), rgba(5,150,105,0.07));
-  border: 1px solid rgba(16,185,129,0.2);
+  background: linear-gradient(135deg, rgba(74,108,247,0.07), rgba(124,58,237,0.07));
+  border: 1px solid rgba(74,108,247,0.2);
   border-radius: var(--radius);
   padding: 16px 20px;
   display: flex;
@@ -336,31 +337,31 @@ body {
   box-shadow: var(--shadow-sm);
 }
 .modul0-banner:hover {
-  background: linear-gradient(135deg, rgba(16,185,129,0.13), rgba(5,150,105,0.10));
-  border-color: rgba(16,185,129,0.35);
+  background: linear-gradient(135deg, rgba(74,108,247,0.13), rgba(124,58,237,0.10));
+  border-color: rgba(74,108,247,0.35);
   transform: translateY(-3px);
-  box-shadow: 0 16px 48px rgba(16,185,129,0.12);
+  box-shadow: 0 16px 48px rgba(74,108,247,0.14);
 }
 .modul0-left { display: flex; align-items: center; gap: 14px; }
-.modul0-badge { font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #059669; margin-bottom: 2px; }
+.modul0-badge { font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
 .modul0-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; letter-spacing: -0.01em; }
 .modul0-desc { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
 .modul0-cta {
   font-size: 13px;
   font-weight: 600;
-  color: #059669;
+  color: var(--accent);
   white-space: nowrap;
   padding: 8px 16px;
   background: rgba(255,255,255,0.8);
   border-radius: var(--radius-xs);
-  border: 1px solid rgba(16,185,129,0.2);
+  border: 1px solid rgba(74,108,247,0.2);
   transition: all 0.2s;
   flex-shrink: 0;
   backdrop-filter: blur(8px);
 }
-.modul0-banner:hover .modul0-cta { background: white; box-shadow: 0 4px 12px rgba(16,185,129,0.15); }
+.modul0-banner:hover .modul0-cta { background: white; box-shadow: 0 4px 12px rgba(74,108,247,0.15); }
 .modul0-steps { display: flex; gap: 4px; margin-top: 7px; }
-.modul0-step { width: 14px; height: 3px; border-radius: 2px; background: rgba(16,185,129,0.15); }
+.modul0-step { width: 14px; height: 3px; border-radius: 2px; background: rgba(74,108,247,0.15); }
 
 /* ═══════════════════════════════════════════════
    SHARED HEADER
@@ -476,20 +477,12 @@ body {
 .toggle-btn.active {
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
   color: white;
-  box-shadow: 0 3px 12px rgba(74,108,247,0.35), 0 1px 3px rgba(74,108,247,0.2);
+  box-shadow: 0 3px 12px rgba(232,69,26,0.35), 0 1px 3px rgba(232,69,26,0.2);
   font-weight: 600;
 }
 .toggle-btn:not(.active):hover { color: var(--text); background: rgba(255,255,255,0.7); }
 
-/* Kompass dots */
-.kp-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--border);
-  transition: background 0.3s;
-}
-.kp-dot.active { background: var(--accent2); }
-.kp-dot.done   { background: #059669; }
+
 
 /* ═══════════════════════════════════════════════
    PROGRESS
@@ -505,12 +498,12 @@ body {
 .progress-step {
   height: 3px;
   flex: 1;
-  background: rgba(74,108,247,0.12);
+  background: rgba(232,69,26,0.12);
   border-radius: 2px;
   transition: background 0.4s ease;
 }
 .progress-step.done { background: var(--accent); }
-.progress-step.active { background: rgba(74,108,247,0.45); animation: stepPulse 1.6s ease infinite; }
+.progress-step.active { background: rgba(232,69,26,0.45); animation: stepPulse 1.6s ease infinite; }
 @keyframes stepPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.55; }
@@ -585,8 +578,8 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 40%, rgba(74,108,247,0.15) 0%, transparent 60%),
-              radial-gradient(circle at 70% 70%, rgba(124,58,237,0.12) 0%, transparent 50%);
+  background: radial-gradient(circle at 30% 40%, rgba(232,69,26,0.15) 0%, transparent 60%),
+              radial-gradient(circle at 70% 70%, rgba(240,117,48,0.12) 0%, transparent 50%);
 }
 
 .video-grain {
@@ -659,7 +652,7 @@ body {
 }
 #chat::-webkit-scrollbar, #kompassChat::-webkit-scrollbar { width: 4px; }
 #chat::-webkit-scrollbar-track, #kompassChat::-webkit-scrollbar-track { background: transparent; }
-#chat::-webkit-scrollbar-thumb, #kompassChat::-webkit-scrollbar-thumb { background: rgba(74,108,247,0.15); border-radius: 4px; }
+#chat::-webkit-scrollbar-thumb, #kompassChat::-webkit-scrollbar-thumb { background: rgba(232,69,26,0.15); border-radius: 4px; }
 
 .message { display: flex; gap: 10px; animation: msgIn 0.3s ease; }
 @keyframes msgIn {
@@ -687,7 +680,7 @@ body {
   color: white;
   font-family: 'Fraunces', serif;
   font-size: 13px;
-  box-shadow: 0 4px 12px rgba(74,108,247,0.3);
+  box-shadow: 0 4px 12px rgba(232,69,26,0.3);
 }
 .message.user .avatar {
   background: rgba(255,255,255,0.7);
@@ -715,7 +708,7 @@ body {
   background: var(--user-bg);
   border-radius: 18px 4px 18px 18px;
   color: white;
-  box-shadow: 0 6px 20px rgba(74,108,247,0.3);
+  box-shadow: 0 6px 20px rgba(232,69,26,0.3);
 }
 .bubble strong { font-weight: 600; }
 .message.bot .bubble strong { color: var(--accent); }
@@ -724,8 +717,8 @@ body {
 
 /* Summary box */
 .summary-box {
-  background: linear-gradient(135deg, rgba(74,108,247,0.05), rgba(124,58,237,0.05));
-  border: 1px solid rgba(74,108,247,0.18);
+  background: linear-gradient(135deg, rgba(232,69,26,0.05), rgba(240,117,48,0.05));
+  border: 1px solid rgba(232,69,26,0.18);
   border-radius: var(--radius);
   padding: 16px 18px;
   margin-top: 10px;
@@ -748,7 +741,7 @@ body {
 .copy-btn {
   margin-top: 12px;
   background: rgba(255,255,255,0.8);
-  border: 1px solid rgba(74,108,247,0.22);
+  border: 1px solid rgba(232,69,26,0.22);
   color: var(--accent);
   padding: 7px 14px;
   border-radius: var(--radius-xs);
@@ -762,7 +755,7 @@ body {
   gap: 6px;
   backdrop-filter: blur(8px);
 }
-.copy-btn:hover { background: white; box-shadow: 0 4px 12px rgba(74,108,247,0.12); }
+.copy-btn:hover { background: white; box-shadow: 0 4px 12px rgba(232,69,26,0.12); }
 
 /* Typing */
 .typing-wrap { display: flex; align-items: flex-start; gap: 10px; }
@@ -825,7 +818,7 @@ body {
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.master-textarea:focus { border-color: rgba(74,108,247,0.35); box-shadow: 0 0 0 3px rgba(74,108,247,0.07); }
+.master-textarea:focus { border-color: rgba(232,69,26,0.35); box-shadow: 0 0 0 3px rgba(232,69,26,0.07); }
 .master-btn {
   margin-top: 10px;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -838,7 +831,7 @@ body {
   font-size: 13px;
   font-weight: 600;
   transition: opacity 0.15s, transform 0.1s;
-  box-shadow: 0 6px 20px rgba(74,108,247,0.3);
+  box-shadow: 0 6px 20px rgba(232,69,26,0.3);
 }
 .master-btn:hover { opacity: 0.92; }
 .master-btn:active { transform: scale(0.98); }
@@ -876,8 +869,8 @@ textarea#input, textarea#kompassInput {
   backdrop-filter: blur(8px);
 }
 textarea#input:focus, textarea#kompassInput:focus {
-  border-color: rgba(74,108,247,0.35);
-  box-shadow: 0 0 0 3px rgba(74,108,247,0.07);
+  border-color: rgba(232,69,26,0.35);
+  box-shadow: 0 0 0 3px rgba(232,69,26,0.07);
   background: rgba(255,255,255,0.9);
 }
 textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--text-light); }
@@ -896,9 +889,9 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
   justify-content: center;
   transition: opacity 0.15s, transform 0.1s, box-shadow 0.2s;
   flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(74,108,247,0.3);
+  box-shadow: 0 4px 16px rgba(232,69,26,0.3);
 }
-#sendBtn:hover, #kompassSendBtn:hover { opacity: 0.92; box-shadow: 0 8px 24px rgba(74,108,247,0.4); }
+#sendBtn:hover, #kompassSendBtn:hover { opacity: 0.92; box-shadow: 0 8px 24px rgba(232,69,26,0.4); }
 #sendBtn:active, #kompassSendBtn:active { transform: scale(0.95); }
 #sendBtn:disabled, #kompassSendBtn:disabled { background: #d1d5db; cursor: not-allowed; box-shadow: none; }
 
@@ -909,9 +902,7 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
   text-align: center;
 }
 
-/* ═══════════════════════════════════════════════
-   KOMPASS INTERFACE
-═══════════════════════════════════════════════ */
+
 #kompassInterface {
   display: none;
   flex-direction: column;
@@ -976,6 +967,7 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
 
   <div class="module-grid" id="moduleGrid"></div>
 </div>
+
 
 
 <!-- ═══════ KOMPASS INTERFACE ═══════ -->
@@ -1105,198 +1097,6 @@ function setView(mode) {
   }
 }
 
-// ─── KOMPASS ─────────────────────────────────────────────────────────────────
-const KOMPASS_SYSTEM = `Du bist der Diagnose-Coach hinter Constantins Marketing-Kurs. Deine Aufgabe: das echte Kernproblem verstehen — und dann herleiten welches Modul wirklich hilft. Nicht raten. Herleiten.
-
-Du klingst wie Constantin: direkt, warm, ohne Aufwärmen. "Halt" kommt natürlich. Du mischst Deutsch und Englisch wenn es passt. Du zeigst Unsicherheit wenn du sie hast. Kein Hochglanz, kein Corporate-Bla. Keine Motivationssprache.
-
-KURSINHALT (kenne das auswendig — das ist die Basis für deine Empfehlung):
-- Modul 0: Orientierung — Marketing-Selbstaudit, Ausgangssituation erfassen
-- Modul 1: Was ist Marketing? — Funnel-Grundlagen, Strategie vs. Taktik, warum Leute Geld verbrennen
-- Modul 2: Vertrauen & Branding — Positionierung, Personal/Corporate/Employer Branding, Markenbotschaft
-- Modul 3: ICP + No-Brainer Offer — Wunschkunde, Jobs-to-be-Done, Angebot das sich von selbst verkauft
-- Modul 4: Sichtbarkeit: Das Framework — Paid vs. Organic, TOFU/MOFU/BOFU, Retargeting-Logik
-- Modul 5: Paid Media — Meta, Google, LinkedIn, TikTok/YouTube, Budget-Allokation, Benchmarks
-- Modul 6: Organic & Content Marketing — SEO, Content-Strategie, Plattformen, Repurposing
-- Modul 7: Alle Kanäle im Überblick — Email/Newsletter, CRM, Influencer, Affiliate, PR, Events, Community
-- Modul 8: Analytics & Messung — KPIs vs. Vanity Metrics, CAC, CLV, ROAS, Tracking-Setup, A/B-Testing
-- Modul 9: Mediengestaltung & Content-Produktion — DIY vs. Profi, Nutzungsrechte, Website, Agenturen
-- Modul 10: B2B-Marketing — Sales Cycles, LinkedIn, Account-Based Marketing, Thought Leadership
-- Modul 11: B2C-Marketing — Impulskauf vs. Überlegter Kauf, E-Commerce Funnel, Influencer, CRO
-- Modul 12: Master-Strategie — Alle Erkenntnisse zu einem 90-Tage-Plan zusammenführen
-
-ABLAUF — exakt 3 Phasen:
-
-PHASE 1 — PROBLEM ERFASSEN (1 Frage):
-Direkt fragen was nicht läuft. Kein Aufwärmen. "Moin, was läuft gerade nicht rund?" reicht.
-
-PHASE 2 — URSACHE VERSTEHEN (1-2 Warum-Fragen):
-Tiefer gehen. Nämlich: das was jemand als Problem beschreibt ist oft nicht das eigentliche Problem. Frag nach.
-
-PHASE 3 — DIAGNOSE & MODULEMPFEHLUNG:
-Wenn du das Problem verstehst: kurze Diagnose, dann 2-3 Modul-Empfehlungen. Herleiten warum.
-
-Deine Empfehlung muss dieses JSON-Format enthalten — EXAKT so:
-
-[EMPFEHLUNG]
-{
-  "diagnose": "Kurze Diagnose in 1-2 Sätzen.",
-  "module": [
-    { "num": 2, "priority": "primary", "title": "Vertrauen & Branding", "warum": "Weil..." },
-    { "num": 3, "priority": "secondary", "title": "ICP + No-Brainer Offer", "warum": "Weil..." }
-  ]
-}
-[/EMPFEHLUNG]
-
-Maximal 4 Fragen insgesamt. Kein "Danke für deine Antwort!". Antworte auf Deutsch.`;
-
-let kompassMsgs = [];
-let kompassPhase = 0;
-let kompassQCount = 0;
-
-function setKompassPhase(p) {
-  kompassPhase = p;
-  for (let i = 0; i < 4; i++) {
-    const el = document.getElementById('kpd' + i);
-    if (!el) continue;
-    if (i < p) el.className = 'kp-dot done';
-    else if (i === p) el.className = 'kp-dot active';
-    else el.className = 'kp-dot';
-  }
-}
-
-function parseRec(text) {
-  const m = text.match(/\[EMPFEHLUNG\]([\s\S]*?)\[\/EMPFEHLUNG\]/);
-  if (!m) return null;
-  try { return JSON.parse(m[1].trim()); } catch { return null; }
-}
-function stripRec(text) {
-  return text.replace(/\[EMPFEHLUNG\][\s\S]*?\[\/EMPFEHLUNG\]/g, '').trim();
-}
-
-function kompassAddMsg(role, text) {
-  const chat = document.getElementById('kompassChat');
-  const rec = role === 'bot' ? parseRec(text) : null;
-  const clean = rec ? stripRec(text) : text;
-  const wrap = document.createElement('div');
-  wrap.className = 'message ' + role;
-  const av = document.createElement('div');
-  av.className = 'avatar';
-  av.textContent = role === 'bot' ? '🧭' : '👤';
-  const bbl = document.createElement('div');
-  bbl.className = 'bubble';
-  bbl.innerHTML = formatText(clean);
-  if (rec) {
-    if (rec.diagnose) {
-      const diag = document.createElement('div');
-      diag.style.cssText = 'margin-top:14px;padding:12px 14px;background:linear-gradient(135deg,rgba(124,58,237,0.07),rgba(74,108,247,0.07));border:1px solid rgba(124,58,237,0.2);border-radius:12px;';
-      diag.innerHTML = `<div style="font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#7C3AED;margin-bottom:6px;">🔍 Das eigentliche Problem</div><div style="font-size:13.5px;line-height:1.6;color:var(--text);">${formatText(rec.diagnose)}</div>`;
-      bbl.appendChild(diag);
-    }
-    if (rec.module?.length) {
-      const cards = document.createElement('div');
-      cards.style.cssText = 'display:flex;flex-direction:column;gap:10px;margin-top:14px;';
-      rec.module.forEach(m => {
-        const card = document.createElement('div');
-        const isPrimary = m.priority === 'primary';
-        card.style.cssText = `background:${isPrimary ? 'linear-gradient(135deg,rgba(74,108,247,0.06),rgba(124,58,237,0.06))' : 'rgba(255,255,255,0.6)'};border:1px solid rgba(74,108,247,${isPrimary ? '0.3' : '0.12'});border-radius:12px;padding:12px 14px;display:flex;align-items:flex-start;gap:12px;backdrop-filter:blur(8px);`;
-        card.innerHTML = `
-          <div style="width:34px;height:34px;border-radius:10px;background:${isPrimary ? 'linear-gradient(135deg,var(--accent),var(--accent2))' : 'var(--accent-light)'};color:${isPrimary ? 'white' : 'var(--accent)'};font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${m.num}</div>
-          <div style="flex:1;min-width:0;">
-            <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:${isPrimary ? 'var(--accent2)' : 'var(--accent)'};margin-bottom:3px;">${isPrimary ? '★ Hier anfangen' : 'Auch relevant'}</div>
-            <div style="font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:3px;">Modul ${m.num} · ${m.title}</div>
-            <div style="font-size:12px;color:var(--text-muted);line-height:1.5;">${m.warum}</div>
-          </div>`;
-        cards.appendChild(card);
-      });
-      bbl.appendChild(cards);
-      setKompassPhase(3);
-    }
-  }
-  wrap.appendChild(av);
-  wrap.appendChild(bbl);
-  chat.appendChild(wrap);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-function kompassShowTyping() {
-  const chat = document.getElementById('kompassChat');
-  const w = document.createElement('div');
-  w.id = 'ktyping';
-  w.className = 'message bot';
-  const av = document.createElement('div');
-  av.className = 'avatar';
-  av.textContent = '🧭';
-  const bbl = document.createElement('div');
-  bbl.className = 'bubble';
-  bbl.style.cssText = 'display:flex;gap:5px;align-items:center;padding:14px 16px;';
-  bbl.innerHTML = '<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
-  w.appendChild(av); w.appendChild(bbl);
-  chat.appendChild(w);
-  chat.scrollTop = chat.scrollHeight;
-}
-function kompassRemoveTyping() {
-  const t = document.getElementById('ktyping');
-  if (t) t.remove();
-}
-
-async function kompassFetch() {
-  kompassShowTyping();
-  try {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1200, system: KOMPASS_SYSTEM, messages: kompassMsgs })
-    });
-    const data = await res.json();
-    kompassRemoveTyping();
-    if (res.status === 429) {
-      kompassAddMsg('bot', `⏳ ${data.message || 'Tageslimit erreicht — morgen wieder.'}`);
-    } else {
-      const reply = data.content?.[0]?.text || 'Verbindungsfehler — versuch es nochmal.';
-      kompassMsgs.push({ role: 'assistant', content: reply });
-      kompassAddMsg('bot', reply);
-      kompassQCount++;
-      if (kompassQCount === 1) setKompassPhase(1);
-      else if (kompassQCount === 2) setKompassPhase(2);
-    }
-  } catch {
-    kompassRemoveTyping();
-    kompassAddMsg('bot', '⚠️ Verbindungsfehler.');
-  }
-  document.getElementById('kompassSendBtn').disabled = false;
-}
-
-async function kompassSend() {
-  const inp = document.getElementById('kompassInput');
-  const text = inp.value.trim();
-  if (!text) return;
-  inp.value = '';
-  inp.style.height = 'auto';
-  document.getElementById('kompassSendBtn').disabled = true;
-  kompassMsgs.push({ role: 'user', content: text });
-  kompassAddMsg('user', text);
-  await kompassFetch();
-}
-
-async function openKompass() {
-  document.getElementById('moduleSelect').style.display = 'none';
-  document.getElementById('kompassInterface').style.display = 'flex';
-  if (kompassMsgs.length > 0) return;
-  document.getElementById('kompassSendBtn').disabled = true;
-  kompassMsgs.push({ role: 'user', content: 'Starte. Begrüß mich in einem Satz — direkt, kein Aufwärmen — und frag sofort was nicht läuft.' });
-  await kompassFetch();
-}
-
-const kompassInp = document.getElementById('kompassInput');
-kompassInp.addEventListener('input', () => {
-  kompassInp.style.height = 'auto';
-  kompassInp.style.height = Math.min(kompassInp.scrollHeight, 120) + 'px';
-});
-kompassInp.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kompassSend(); }
-});
-
 // ─── localStorage ─────────────────────────────────────────────────────────────
 const STORE_KEY = 'mk_coach_v1';
 function loadStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; } }
@@ -1343,7 +1143,7 @@ function updateModul0Banner() {
   if (done) {
     banner.classList.add('completed');
     badge.textContent = '✓ Abgeschlossen';
-    badge.style.color = '#059669';
+    badge.style.color = '#4A6CF7';
     cta.textContent = 'Wiederholen →';
   } else {
     banner.classList.remove('completed');
@@ -1650,6 +1450,199 @@ function resetModule() {
   openModule(currentModule);
 }
 
+// ─── KOMPASS ─────────────────────────────────────────────────────────────────
+const KOMPASS_SYSTEM = `Du bist der Diagnose-Coach hinter Constantins Marketing-Kurs. Deine Aufgabe: das echte Kernproblem verstehen — und dann herleiten welches Modul wirklich hilft. Nicht raten. Herleiten.
+
+Du klingst wie Constantin: direkt, warm, ohne Aufwärmen. "Halt" kommt natürlich. Du mischst Deutsch und Englisch wenn es passt. Du zeigst Unsicherheit wenn du sie hast. Kein Hochglanz, kein Corporate-Bla. Keine Motivationssprache.
+
+KURSINHALT (kenne das auswendig — das ist die Basis für deine Empfehlung):
+- Modul 0: Orientierung — Marketing-Selbstaudit, Ausgangssituation erfassen
+- Modul 1: Was ist Marketing? — Funnel-Grundlagen, Strategie vs. Taktik, warum Leute Geld verbrennen
+- Modul 2: Vertrauen & Branding — Positionierung, Personal/Corporate/Employer Branding, Markenbotschaft
+- Modul 3: ICP + No-Brainer Offer — Wunschkunde, Jobs-to-be-Done, Angebot das sich von selbst verkauft
+- Modul 4: Sichtbarkeit: Das Framework — Paid vs. Organic, TOFU/MOFU/BOFU, Retargeting-Logik
+- Modul 5: Paid Media — Meta, Google, LinkedIn, TikTok/YouTube, Budget-Allokation, Benchmarks
+- Modul 6: Organic & Content Marketing — SEO, Content-Strategie, Plattformen, Repurposing
+- Modul 7: Alle Kanäle im Überblick — Email/Newsletter, CRM, Influencer, Affiliate, PR, Events, Community
+- Modul 8: Analytics & Messung — KPIs vs. Vanity Metrics, CAC, CLV, ROAS, Tracking-Setup, A/B-Testing
+- Modul 9: Mediengestaltung & Content-Produktion — DIY vs. Profi, Nutzungsrechte, Website, Agenturen
+- Modul 10: B2B-Marketing — Sales Cycles, LinkedIn, Account-Based Marketing, Thought Leadership
+- Modul 11: B2C-Marketing — Impulskauf vs. Überlegter Kauf, E-Commerce Funnel, Influencer, CRO
+- Modul 12: Master-Strategie — Alle Erkenntnisse zu einem 90-Tage-Plan zusammenführen
+
+ABLAUF — exakt 3 Phasen:
+
+PHASE 1 — PROBLEM ERFASSEN (1 Frage):
+Direkt fragen was nicht läuft. Kein Aufwärmen. "Moin, was läuft gerade nicht rund?" reicht.
+
+PHASE 2 — URSACHE VERSTEHEN (1-2 Warum-Fragen):
+Tiefer gehen. Nämlich: das was jemand als Problem beschreibt ist oft nicht das eigentliche Problem. Frag nach.
+
+PHASE 3 — DIAGNOSE & MODULEMPFEHLUNG:
+Wenn du das Problem verstehst: kurze Diagnose, dann 2-3 Modul-Empfehlungen. Herleiten warum.
+
+Deine Empfehlung muss dieses JSON-Format enthalten — EXAKT so:
+
+[EMPFEHLUNG]
+{
+  "diagnose": "Kurze Diagnose in 1-2 Sätzen.",
+  "module": [
+    { "num": 2, "priority": "primary", "title": "Vertrauen & Branding", "warum": "Weil..." },
+    { "num": 3, "priority": "secondary", "title": "ICP + No-Brainer Offer", "warum": "Weil..." }
+  ]
+}
+[/EMPFEHLUNG]
+
+Maximal 4 Fragen insgesamt. Kein "Danke für deine Antwort!". Antworte auf Deutsch.`;
+
+let kompassMsgs = [];
+let kompassPhase = 0;
+let kompassQCount = 0;
+
+function setKompassPhase(p) {
+  kompassPhase = p;
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('kpd' + i);
+    if (!el) continue;
+    if (i < p) el.className = 'kp-dot done';
+    else if (i === p) el.className = 'kp-dot active';
+    else el.className = 'kp-dot';
+  }
+}
+
+function parseRec(text) {
+  const m = text.match(/\[EMPFEHLUNG\]([\s\S]*?)\[\/EMPFEHLUNG\]/);
+  if (!m) return null;
+  try { return JSON.parse(m[1].trim()); } catch { return null; }
+}
+function stripRec(text) {
+  return text.replace(/\[EMPFEHLUNG\][\s\S]*?\[\/EMPFEHLUNG\]/g, '').trim();
+}
+
+function kompassAddMsg(role, text) {
+  const chat = document.getElementById('kompassChat');
+  const rec = role === 'bot' ? parseRec(text) : null;
+  const clean = rec ? stripRec(text) : text;
+  const wrap = document.createElement('div');
+  wrap.className = 'message ' + role;
+  const av = document.createElement('div');
+  av.className = 'avatar';
+  av.textContent = role === 'bot' ? '🧭' : '👤';
+  const bbl = document.createElement('div');
+  bbl.className = 'bubble';
+  bbl.innerHTML = formatText(clean);
+  if (rec) {
+    if (rec.diagnose) {
+      const diag = document.createElement('div');
+      diag.style.cssText = 'margin-top:14px;padding:12px 14px;background:linear-gradient(135deg,rgba(124,58,237,0.07),rgba(74,108,247,0.07));border:1px solid rgba(124,58,237,0.2);border-radius:12px;';
+      diag.innerHTML = `<div style="font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#7C3AED;margin-bottom:6px;">🔍 Das eigentliche Problem</div><div style="font-size:13.5px;line-height:1.6;color:var(--text);">${formatText(rec.diagnose)}</div>`;
+      bbl.appendChild(diag);
+    }
+    if (rec.module?.length) {
+      const cards = document.createElement('div');
+      cards.style.cssText = 'display:flex;flex-direction:column;gap:10px;margin-top:14px;';
+      rec.module.forEach(m => {
+        const card = document.createElement('div');
+        const isPrimary = m.priority === 'primary';
+        card.style.cssText = `background:${isPrimary ? 'linear-gradient(135deg,rgba(74,108,247,0.06),rgba(124,58,237,0.06))' : 'rgba(255,255,255,0.6)'};border:1px solid rgba(74,108,247,${isPrimary ? '0.3' : '0.12'});border-radius:12px;padding:12px 14px;display:flex;align-items:flex-start;gap:12px;backdrop-filter:blur(8px);`;
+        card.innerHTML = `
+          <div style="width:34px;height:34px;border-radius:10px;background:${isPrimary ? 'linear-gradient(135deg,var(--accent),var(--accent2))' : 'var(--accent-light)'};color:${isPrimary ? 'white' : 'var(--accent)'};font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${m.num}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:${isPrimary ? 'var(--accent2)' : 'var(--accent)'};margin-bottom:3px;">${isPrimary ? '★ Hier anfangen' : 'Auch relevant'}</div>
+            <div style="font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:3px;">Modul ${m.num} · ${m.title}</div>
+            <div style="font-size:12px;color:var(--text-muted);line-height:1.5;">${m.warum}</div>
+          </div>`;
+        cards.appendChild(card);
+      });
+      bbl.appendChild(cards);
+      setKompassPhase(3);
+    }
+  }
+  wrap.appendChild(av);
+  wrap.appendChild(bbl);
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function kompassShowTyping() {
+  const chat = document.getElementById('kompassChat');
+  const w = document.createElement('div');
+  w.id = 'ktyping';
+  w.className = 'message bot';
+  const av = document.createElement('div');
+  av.className = 'avatar';
+  av.textContent = '🧭';
+  const bbl = document.createElement('div');
+  bbl.className = 'bubble';
+  bbl.style.cssText = 'display:flex;gap:5px;align-items:center;padding:14px 16px;';
+  bbl.innerHTML = '<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
+  w.appendChild(av); w.appendChild(bbl);
+  chat.appendChild(w);
+  chat.scrollTop = chat.scrollHeight;
+}
+function kompassRemoveTyping() {
+  const t = document.getElementById('ktyping');
+  if (t) t.remove();
+}
+
+async function kompassFetch() {
+  kompassShowTyping();
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1200, system: KOMPASS_SYSTEM, messages: kompassMsgs })
+    });
+    const data = await res.json();
+    kompassRemoveTyping();
+    if (res.status === 429) {
+      kompassAddMsg('bot', `⏳ ${data.message || 'Tageslimit erreicht — morgen wieder.'}`);
+    } else {
+      const reply = data.content?.[0]?.text || 'Verbindungsfehler — versuch es nochmal.';
+      kompassMsgs.push({ role: 'assistant', content: reply });
+      kompassAddMsg('bot', reply);
+      kompassQCount++;
+      if (kompassQCount === 1) setKompassPhase(1);
+      else if (kompassQCount === 2) setKompassPhase(2);
+    }
+  } catch {
+    kompassRemoveTyping();
+    kompassAddMsg('bot', '⚠️ Verbindungsfehler.');
+  }
+  document.getElementById('kompassSendBtn').disabled = false;
+}
+
+async function kompassSend() {
+  const inp = document.getElementById('kompassInput');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  inp.style.height = 'auto';
+  document.getElementById('kompassSendBtn').disabled = true;
+  kompassMsgs.push({ role: 'user', content: text });
+  kompassAddMsg('user', text);
+  await kompassFetch();
+}
+
+async function openKompass() {
+  document.getElementById('moduleSelect').style.display = 'none';
+  document.getElementById('kompassInterface').style.display = 'flex';
+  if (kompassMsgs.length > 0) return;
+  document.getElementById('kompassSendBtn').disabled = true;
+  kompassMsgs.push({ role: 'user', content: 'Starte. Begrüß mich in einem Satz — direkt, kein Aufwärmen — und frag sofort was nicht läuft.' });
+  await kompassFetch();
+}
+
+document.getElementById('kompassInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kompassSend(); }
+});
+document.getElementById('kompassInput').addEventListener('input', () => {
+  const inp = document.getElementById('kompassInput');
+  inp.style.height = 'auto';
+  inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
+});
+
+// ─── NAVIGATION ──────────────────────────────────────────────────────────────
 function goBack() {
   document.getElementById('chatInterface').style.display = 'none';
   document.getElementById('kompassInterface').style.display = 'none';
