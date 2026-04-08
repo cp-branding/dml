@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marketing-Kurs · Login</title>
+<link rel="icon" type="image/png" href="/dml_favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:wght@400;600&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,12 +73,19 @@ body::after {
 .logo-mark {
   width: 42px;
   height: 42px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
   border-radius: 11px;
+  overflow: hidden;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+}
+
+.logo-mark img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 11px;
 }
 
 .logo-text h1 {
@@ -199,7 +207,9 @@ button[type="submit"]:disabled {
 
 <div class="card">
   <div class="logo">
-    <div class="logo-mark">📈</div>
+    <div class="logo-mark">
+      <img src="/dml_favicon.png" alt="DML">
+    </div>
     <div class="logo-text">
       <h1>Marketing-Kurs</h1>
       <p>von Constantin Pechel</p>
