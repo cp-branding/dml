@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marketing-Kurs Coach</title>
 <link rel="icon" type="image/png" href="/dml_favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -200,12 +200,7 @@ body {
   border: 1px solid rgba(220,38,38,0.18);
 }
 
-.module-card.master {
-  background: linear-gradient(135deg, rgba(232,69,26,0.07), rgba(240,117,48,0.07));
-  border-color: rgba(232,69,26,0.25);
-}
-.module-card.master::after { opacity: 1; }
-.module-card.master .module-num { color: var(--accent2); }
+.module-card.master .module-num { color: var(--accent); }
 
 .module-num-row {
   display: flex;
@@ -439,9 +434,9 @@ body {
   margin-bottom: 3px;
 }
 .header-title {
-  font-family: 'Fraunces', serif;
-  font-size: 15px;
-  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
   color: var(--text);
   white-space: nowrap;
   overflow: hidden;
@@ -916,6 +911,14 @@ body {
 }
 .ctx-skip:hover { color: var(--text-muted); }
 
+/* ── MODE SELECT ── */
+.mode-select-wrap { display: flex; gap: 14px; padding: 24px 20px; flex-direction: column; }
+.mode-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 20px 22px; cursor: pointer; transition: all 0.25s cubic-bezier(0.2,0.8,0.2,1); backdrop-filter: blur(16px); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 16px; }
+.mode-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); background: var(--glass-hover); border-color: rgba(255,255,255,0.95); }
+.mode-icon { font-size: 28px; flex-shrink: 0; }
+.mode-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; letter-spacing: -0.01em; }
+.mode-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
 /* ── FOOTER ── */
 footer {
   padding: 12px 20px 16px;
@@ -1096,7 +1099,6 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
     </div>
     <div class="header-logo">
       <div class="header-logo-icon"><img src="/dml_favicon.png" alt="DML"></div>
-      <img src="/dml_wordmark.png" alt="DML" class="header-logo-wordmark">
     </div>
   </div>
 
@@ -1124,15 +1126,15 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
 
     <!-- CHAT COLUMN -->
     <div class="chat-column">
-      <div id="contextInputSection" style="display:none;">
-        <div class="context-input-section">
-          <div class="ctx-icon">📎</div>
-          <div class="ctx-title">Hast du Kontextmaterial?</div>
-          <div class="ctx-sub">Website, Positionierung, Strategie-Notizen, Zielgruppe — alles was der Coach wissen soll. Einfach reinkopieren. Oder überspringen.</div>
-          <textarea class="ctx-textarea" id="contextInput" placeholder="z.B. Website-Text, ICP-Beschreibung, bisherige Strategie, Produkte …"></textarea>
-          <div class="ctx-actions">
-            <button class="ctx-btn" onclick="startWithContext()">Mit Kontext starten →</button>
-            <button class="ctx-skip" onclick="skipContext()">Überspringen</button>
+      <div id="modeSelectSection" style="display:none;">
+        <div class="mode-select-wrap">
+          <div class="mode-card" onclick="chooseVideo()">
+            <div class="mode-icon">▶</div>
+            <div><div class="mode-title">Video zuerst</div><div class="mode-desc">Schau das Modul-Video — dann geht's direkt in den Chat.</div></div>
+          </div>
+          <div class="mode-card" onclick="chooseChat()">
+            <div class="mode-icon">💬</div>
+            <div><div class="mode-title">Direkt loslegen</div><div class="mode-desc">Kein Video — einfach die Fragen beantworten.</div></div>
           </div>
         </div>
       </div>
@@ -1201,7 +1203,7 @@ function getChat(modNum) { return loadStore().chats?.[modNum] || null; }
 function getAllSummaries() { const s = loadStore(); const sums = s.summaries || {}; return Object.keys(sums).sort((a,b)=>Number(a)-Number(b)).map(k=>sums[k]).join('\n\n---\n\n'); }
 function clearModule(modNum) { const s = loadStore(); if (s.summaries) delete s.summaries[modNum]; if (s.chats) delete s.chats[modNum]; saveStore(s); }
 function pushProgress(moduleKey, summaryText, chatMsgs, answerCount) { fetch('/api/save-progress', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ moduleKey: String(moduleKey), summaryText, chatMsgs, answerCount }) }).catch(() => {}); }
-async function syncFromServer() { try { const res = await fetch('/api/load-progress'); if (!res.ok) return; const d = await res.json(); const local = loadStore(); if (d.summaries) local.summaries = { ...(local.summaries || {}), ...d.summaries }; if (d.chats) local.chats = { ...(local.chats || {}), ...d.chats }; saveStore(local); } catch {} }
+async function syncFromServer() { try { const res = await fetch('/api/load-progress'); if (!res.ok) return; const d = await res.json(); const local = loadStore(); if (d.summaries) { Object.keys(d.summaries).forEach(k => { if (!local.summaries?.[k]) { if (!local.summaries) local.summaries = {}; local.summaries[k] = d.summaries[k]; } }); } if (d.chats) { Object.keys(d.chats).forEach(k => { const localCount = local.chats?.[k]?.answerCount || 0; const serverCount = d.chats[k]?.answerCount || 0; if (serverCount > localCount) { if (!local.chats) local.chats = {}; local.chats[k] = d.chats[k]; } }); } saveStore(local); } catch {} }
 
 // ─── MODULES ──────────────────────────────────────────────────────────────────
 const MODULES = [
@@ -1360,38 +1362,33 @@ function openModule(mod) {
     initChat();
   } else {
     masterSection.style.display = 'none';
-    const ctxSection = document.getElementById('contextInputSection');
     const saved = getChat(mod.num);
     if (saved && saved.msgs.length > 1) {
-      // Already has a chat — restore directly, skip context prompt
-      ctxSection.style.display = 'none';
       footer.style.display = 'block';
       restoreChat(saved);
     } else {
-      // New session — show context input first
-      ctxSection.style.display = 'block';
-      document.getElementById('contextInput').value = '';
+      document.getElementById('modeSelectSection').style.display = 'block';
       footer.style.display = 'none';
     }
   }
 }
 
-function startWithContext() {
-  const ctx = document.getElementById('contextInput').value.trim();
-  document.getElementById('contextInputSection').style.display = 'none';
+function chooseVideo() {
+  document.getElementById('modeSelectSection').style.display = 'none';
   document.querySelector('#chatInterface footer').style.display = 'block';
-  if (ctx) {
-    // Prepend context to system prompt for this session
-    const originalPrompt = currentModule.systemPrompt;
-    currentModule._runtimePrompt = `KONTEXT ÜBER DEN KURSTEILNEHMER (vor der Session eingereicht):\n---\n${ctx}\n---\n\n${originalPrompt}`;
-  }
+  setView('video');
+  initChat();
+}
+
+function chooseChat() {
+  document.getElementById('modeSelectSection').style.display = 'none';
+  document.querySelector('#chatInterface footer').style.display = 'block';
   initChat();
 }
 
 function skipContext() {
-  document.getElementById('contextInputSection').style.display = 'none';
+  document.getElementById('modeSelectSection').style.display = 'none';
   document.querySelector('#chatInterface footer').style.display = 'block';
-  currentModule._runtimePrompt = null;
   initChat();
 }
 
@@ -1421,11 +1418,19 @@ async function initChat() {
   const initMsg = currentModule.isStress
     ? 'Starte. Ein Satz Begrüßung — dann sofort: Beschreib mir deine Marketing-Strategie.'
     : 'Starte die Session. Begrüße mich kurz und stelle die erste Frage.';
+  // Vorhandene Modul-Zusammenfassungen als Kontext einbauen
+  let systemPrompt = currentModule.systemPrompt;
+  if (!currentModule.isStress && !currentModule.isMaster) {
+    const existingSummaries = getAllSummaries();
+    if (existingSummaries) {
+      systemPrompt = `KONTEXT ÜBER DEN KURSTEILNEHMER (aus bereits abgeschlossenen Modulen):\n---\n${existingSummaries}\n---\n\nNutze diesen Kontext um den Nutzer bereits zu kennen — frag nicht nochmal was du schon weißt.\n\n${systemPrompt}`;
+    }
+  }
   try {
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: currentModule._runtimePrompt || currentModule.systemPrompt, messages: [{ role: 'user', content: initMsg }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content: initMsg }] })
     });
     const data = await res.json();
     removeTyping();
@@ -1445,7 +1450,10 @@ function addMsg(role, text, isRestore = false) {
   wrap.className = 'message ' + role;
   const av = document.createElement('div');
   av.className = 'avatar';
-  av.textContent = role === 'bot' ? (currentModule?.isStress ? '⚡' : 'M') : '👤';
+  if (role === 'bot') {
+    if (currentModule?.isStress) { av.textContent = '⚡'; }
+    else { av.style.cssText = 'background:none;border:none;box-shadow:none;overflow:hidden;padding:0;'; av.innerHTML = '<img src="/constantin_pechel_cp_branding.jpeg" style="width:30px;height:30px;border-radius:50%;object-fit:cover;object-position:center top;">'; }
+  } else { av.textContent = '👤'; }
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   bubble.innerHTML = formatText(text);
@@ -1463,6 +1471,7 @@ function addMsg(role, text, isRestore = false) {
     sbox.innerHTML = `<h4>✓ Zusammenfassung gespeichert</h4><p>${escapeHtml(text)}</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
         <button class="copy-btn" onclick="copySummary()">📋 Kopieren</button>
+        <button class="copy-btn" onclick="getNextSteps()" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border-color:transparent;box-shadow:0 4px 12px rgba(232,69,26,0.25);">→ Was jetzt?</button>
         <button class="copy-btn" onclick="resetModule()">↩ Modul wiederholen</button>
       </div>`;
     bubble.appendChild(sbox);
@@ -1479,6 +1488,13 @@ function copySummary() {
     const btn = document.querySelector('.copy-btn');
     if (btn) { btn.textContent = '✓ Kopiert!'; setTimeout(() => btn.textContent = '📋 Zusammenfassung kopieren', 2000); }
   });
+}
+
+function getNextSteps() {
+  const prompt = `Basierend auf dieser Zusammenfassung: Was sind meine 3 konkreten nächsten Schritte für diese Woche? Sei direkt und spezifisch — keine Theorie, nur was ich morgen anfangen kann.`;
+  messages.push({ role: 'user', content: prompt });
+  addMsg('user', '→ Was jetzt?');
+  fetchReply();
 }
 
 function formatText(text) {
@@ -1767,6 +1783,7 @@ function goBack() {
   document.getElementById('chatInterface').style.display = 'none';
   document.getElementById('kompassInterface').style.display = 'none';
   document.getElementById('moduleSelect').style.display = 'flex';
+  document.getElementById('modeSelectSection').style.display = 'none';
   document.querySelector('#chatInterface footer').style.display = 'block';
   buildGrid();
 }
