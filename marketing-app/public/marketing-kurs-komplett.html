@@ -1316,6 +1316,8 @@ body {
 .chip-dot:nth-child(3) { animation-delay: 0.4s; }
 
 
+/* ── FOOTER ── */
+footer {
   padding: 12px 20px 16px;
   background: var(--glass);
   backdrop-filter: blur(24px);
@@ -2444,16 +2446,24 @@ function showChipsLoading() {
 function renderChips(chips) {
   const c = document.getElementById('chipsContainer');
   if (!c || !chips?.length) { clearChips(); return; }
-  c.innerHTML = `<div class="chips-row">${chips.map(chip =>
-    `<button class="chip" onclick="sendChip(${JSON.stringify(chip)})">${escapeHtml(chip)}</button>`
-  ).join('')}</div>`;
+  c.innerHTML = '<div class="chips-row"></div>';
+  const row = c.querySelector('.chips-row');
+  chips.forEach(chip => {
+    const btn = document.createElement('button');
+    btn.className = 'chip';
+    btn.textContent = chip;
+    btn.addEventListener('click', () => sendChip(chip));
+    row.appendChild(btn);
+  });
 }
 
 function sendChip(text) {
   clearChips();
   const input = document.getElementById('input');
   input.value = text;
-  send();
+  input.dispatchEvent(new Event('input')); // trigger auto-resize
+  // Small delay to ensure value is set before send
+  setTimeout(() => send(), 10);
 }
 
 async function generateChips(botReply) {
