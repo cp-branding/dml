@@ -5,7 +5,8 @@ export default async function handler(req, res) {
   if (!cookies.includes(`mk_session=${process.env.SESSION_SECRET}`))
     return res.status(401).json({ error: 'Unauthorized' });
 
-  const emailMatch = cookies.match(/mk_user=([^;]+)/);
+  // ✅ Correct cookie name: mk_user_email
+  const emailMatch = cookies.match(/mk_user_email=([^;]+)/);
   if (!emailMatch) return res.status(401).json({ error: 'No user cookie' });
   const userEmail = decodeURIComponent(emailMatch[1]);
 
