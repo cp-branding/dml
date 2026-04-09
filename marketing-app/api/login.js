@@ -1,39 +1,36 @@
-export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-
+export default function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+ 
   const { email, password } = req.body;
-
-  if (!email || !email.includes('@')) {
-    return res.status(400).json({ error: 'Ungültige Email.' });
+ 
+  // Parse USERS env var: [{"email":"...","password":"..."},...]
+  let users = [];
+  try {
+    users = JSON.parse(process.env.USERS || '[]');
+  } catch {
+    return res.status(500).json({ error: 'Server configuration error' });
   }
-
-  const normalizedEmail = email.toLowerCase().trim();
-
-  const r = await fetch(
-    `${process.env.SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(normalizedEmail)}&select=email,password&limit=1`,
-    {
-      headers: {
-        'apikey': process.env.SUPABASE_SERVICE_KEY,
-        'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_KEY}`
-      }
-    }
+ 
+  const user = users.find(
+    u => u.email === email && u.password === password
   );
-
-  if (!r.ok) return res.status(500).json({ error: 'Datenbankfehler.' });
-
-  const rows = await r.json();
-  const user = rows[0];
-
-  if (!user || user.password !== password) {
-    return res.status(401).json({ error: 'Email oder Passwort falsch.' });
+ 
+  if (!user) {
+    return res.status(401).json({ error: 'Invalid credentials' });
   }
-
-  const encodedEmail = encodeURIComponent(normalizedEmail);
-
+ 
+  const isProd = process.env.NODE_ENV === 'production';
+  const cookieOpts = `Path=/; HttpOnly; SameSite=Lax${isProd ? '; Secure' : ''}`;
+ 
+  // Set session cookie (auth token)
+  // Set email cookie (readable by auth.js to identify the user)
   res.setHeader('Set-Cookie', [
-    `mk_session=${process.env.SESSION_SECRET}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${60 * 60 * 24 * 30}`,
-    `mk_user=${encodedEmail}; Path=/; Secure; SameSite=Strict; Max-Age=${60 * 60 * 24 * 30}`
+    `mk_session=${process.env.SESSION_SECRET}; ${cookieOpts}`,
+    `mk_user_email=${encodeURIComponent(user.email)}; ${cookieOpts}`
   ]);
-
+ 
   return res.status(200).json({ ok: true });
 }
+ 
