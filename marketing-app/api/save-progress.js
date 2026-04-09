@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   const { moduleKey, summaryText, chatMsgs, answerCount } = req.body;
   if (!moduleKey) return res.status(400).json({ error: 'moduleKey required' });
 
-  const r = await fetch(`${process.env.SUPABASE_URL}/rest/v1/user_progress`, {
+  const r = await fetch(`${process.env.SUPABASE_URL}/rest/v1/user_progress?on_conflict=user_email,module_key`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
