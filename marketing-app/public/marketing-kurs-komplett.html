@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;1,400&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
 :root {
   --bg: #F6F1EF;
   --glass: rgba(255,255,255,0.62);
@@ -34,7 +34,7 @@
   --radius-xl: 32px;
   --user-bg: linear-gradient(135deg, #E8451A 0%, #C83010 100%);
 }
-
+ 
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
@@ -46,7 +46,7 @@ body {
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
 }
-
+ 
 /* ── Background blobs ── */
 .bg-blob {
   position: fixed;
@@ -60,7 +60,7 @@ body {
 .bg-blob-1 { top:-20%; left:-15%; width:70vw; height:70vw; background: radial-gradient(circle, rgba(232,69,26,0.18) 0%, transparent 70%); }
 .bg-blob-2 { bottom:-25%; right:-15%; width:65vw; height:65vw; background: radial-gradient(circle, rgba(240,140,60,0.14) 0%, transparent 70%); }
 .bg-blob-3 { top:30%; left:30%; width:50vw; height:50vw; background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, transparent 70%); filter: blur(80px); opacity: 0.9; }
-
+ 
 /* ═══════════════════════════════════════════════
    APP SHELL — SIDEBAR LAYOUT
 ═══════════════════════════════════════════════ */
@@ -71,7 +71,7 @@ body {
   display: flex;
   flex-direction: row;
 }
-
+ 
 /* ── SIDEBAR ── */
 .sidebar {
   width: 220px;
@@ -84,7 +84,7 @@ body {
   position: relative;
   overflow: hidden;
 }
-
+ 
 .sidebar::before {
   content: '';
   position: absolute;
@@ -93,7 +93,7 @@ body {
   background: radial-gradient(circle, rgba(232,69,26,0.18) 0%, transparent 65%);
   pointer-events: none;
 }
-
+ 
 .sidebar-logo {
   padding: 22px 20px 16px;
   display: flex;
@@ -104,7 +104,7 @@ body {
   position: relative;
   z-index: 1;
 }
-
+ 
 .sidebar-logo-icon {
   width: 36px;
   height: 36px;
@@ -112,14 +112,14 @@ body {
   object-fit: cover;
   flex-shrink: 0;
 }
-
+ 
 .sidebar-logo-text {
   display: flex;
   flex-direction: column;
   gap: 1px;
   min-width: 0;
 }
-
+ 
 .sidebar-logo-brand {
   font-family: 'Fraunces', serif;
   font-size: 13px;
@@ -128,14 +128,14 @@ body {
   letter-spacing: -0.01em;
   line-height: 1.2;
 }
-
+ 
 .sidebar-logo-sub {
   font-size: 10px;
   color: rgba(255,255,255,0.35);
   font-weight: 400;
   letter-spacing: 0.02em;
 }
-
+ 
 /* ── SIDEBAR NAV ── */
 .sidebar-nav {
   flex: 1;
@@ -147,11 +147,11 @@ body {
   position: relative;
   z-index: 1;
 }
-
+ 
 .sidebar-nav::-webkit-scrollbar { width: 3px; }
 .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
 .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-
+ 
 .nav-section-label {
   font-size: 9.5px;
   font-weight: 700;
@@ -161,7 +161,7 @@ body {
   padding: 10px 10px 4px;
   margin-top: 6px;
 }
-
+ 
 .nav-item {
   display: flex;
   align-items: center;
@@ -172,20 +172,20 @@ body {
   transition: all 0.18s ease;
   position: relative;
 }
-
+ 
 .nav-item:hover {
   background: rgba(255,255,255,0.06);
 }
-
+ 
 .nav-item.active {
   background: rgba(232,69,26,0.15);
   border: 1px solid rgba(232,69,26,0.25);
 }
-
+ 
 .nav-item.completed .nav-check {
   opacity: 1;
 }
-
+ 
 .nav-icon {
   width: 28px;
   height: 28px;
@@ -198,21 +198,21 @@ body {
   flex-shrink: 0;
   transition: background 0.18s;
 }
-
+ 
 .nav-item.active .nav-icon {
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   box-shadow: 0 4px 12px rgba(232,69,26,0.35);
 }
-
+ 
 .nav-item.completed .nav-icon {
   background: rgba(16,185,129,0.15);
 }
-
+ 
 .nav-label {
   flex: 1;
   min-width: 0;
 }
-
+ 
 .nav-label-top {
   font-size: 11px;
   font-weight: 500;
@@ -223,16 +223,16 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+ 
 .nav-item.active .nav-label-top,
 .nav-item:hover .nav-label-top {
   color: rgba(255,255,255,0.9);
 }
-
+ 
 .nav-item.completed .nav-label-top {
   color: rgba(255,255,255,0.7);
 }
-
+ 
 .nav-label-sub {
   font-size: 9.5px;
   color: rgba(255,255,255,0.25);
@@ -240,7 +240,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+ 
 .nav-check {
   width: 14px;
   height: 14px;
@@ -255,7 +255,7 @@ body {
   opacity: 0;
   transition: opacity 0.2s;
 }
-
+ 
 .nav-item.stress-nav {
   background: rgba(220,38,38,0.07);
   border: 1px solid rgba(220,38,38,0.15);
@@ -263,7 +263,7 @@ body {
 }
 .nav-item.stress-nav:hover { background: rgba(220,38,38,0.12); }
 .nav-item.stress-nav .nav-label-top { color: rgba(255,255,255,0.7); }
-
+ 
 /* ── SIDEBAR USER AREA ── */
 .sidebar-user {
   padding: 14px 12px;
@@ -272,7 +272,7 @@ body {
   position: relative;
   z-index: 1;
 }
-
+ 
 .sidebar-user-inner {
   display: flex;
   align-items: center;
@@ -283,11 +283,11 @@ body {
   transition: background 0.18s;
   position: relative;
 }
-
+ 
 .sidebar-user-inner:hover {
   background: rgba(255,255,255,0.06);
 }
-
+ 
 .user-avatar {
   width: 36px;
   height: 36px;
@@ -304,19 +304,19 @@ body {
   box-shadow: 0 4px 12px rgba(232,69,26,0.35);
   overflow: hidden;
 }
-
+ 
 .user-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
-
+ 
 .user-info {
   flex: 1;
   min-width: 0;
 }
-
+ 
 .user-name {
   font-size: 12px;
   font-weight: 500;
@@ -327,7 +327,7 @@ body {
   line-height: 1.2;
   margin-bottom: 1px;
 }
-
+ 
 .user-email {
   font-size: 10px;
   color: rgba(255,255,255,0.3);
@@ -335,13 +335,13 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+ 
 .user-dots {
   font-size: 14px;
   color: rgba(255,255,255,0.25);
   flex-shrink: 0;
 }
-
+ 
 /* User popup menu */
 .user-popup {
   position: absolute;
@@ -356,31 +356,31 @@ body {
   display: none;
   z-index: 200;
 }
-
+ 
 .user-popup.open { display: block; }
-
+ 
 .user-popup-header {
   padding: 12px 14px;
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
-
+ 
 .user-popup-name {
   font-size: 12px;
   font-weight: 600;
   color: rgba(255,255,255,0.85);
   margin-bottom: 2px;
 }
-
+ 
 .user-popup-email {
   font-size: 11px;
   color: rgba(255,255,255,0.3);
 }
-
+ 
 .user-popup-divider {
   height: 1px;
   background: rgba(255,255,255,0.07);
 }
-
+ 
 .user-popup-item {
   display: flex;
   align-items: center;
@@ -392,27 +392,27 @@ body {
   cursor: pointer;
   transition: all 0.15s;
 }
-
+ 
 .user-popup-item:hover {
   background: rgba(255,255,255,0.05);
   color: rgba(255,255,255,0.9);
 }
-
+ 
 .user-popup-item.danger {
   color: rgba(239,68,68,0.75);
 }
-
+ 
 .user-popup-item.danger:hover {
   background: rgba(239,68,68,0.07);
   color: rgba(239,68,68,1);
 }
-
+ 
 .user-popup-item-icon {
   font-size: 14px;
   width: 18px;
   text-align: center;
 }
-
+ 
 /* Progress dots in sidebar */
 .nav-progress {
   display: flex;
@@ -429,7 +429,7 @@ body {
 .nav-prog-dot.done {
   background: #10b981;
 }
-
+ 
 /* ── MAIN CONTENT AREA ── */
 .main-content {
   flex: 1;
@@ -440,11 +440,11 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
+ 
 .main-content::-webkit-scrollbar { width: 5px; }
 .main-content::-webkit-scrollbar-track { background: transparent; }
 .main-content::-webkit-scrollbar-thumb { background: rgba(232,69,26,0.15); border-radius: 4px; }
-
+ 
 /* ── WELCOME HEADER ── */
 .welcome-header {
   width: 100%;
@@ -455,7 +455,7 @@ body {
   margin-bottom: 28px;
   gap: 16px;
 }
-
+ 
 .welcome-title {
   font-family: 'Fraunces', serif;
   font-size: 32px;
@@ -464,12 +464,12 @@ body {
   letter-spacing: -0.03em;
   line-height: 1.1;
 }
-
+ 
 .welcome-emoji {
   font-size: 44px;
   flex-shrink: 0;
 }
-
+ 
 /* ── MODULE SELECTOR (inside main content) ── */
 #moduleSelect {
   display: flex;
@@ -477,7 +477,7 @@ body {
   align-items: center;
   width: 100%;
 }
-
+ 
 .module-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -486,7 +486,7 @@ body {
   max-width: 860px;
   margin-top: 10px;
 }
-
+ 
 .module-card {
   background: var(--glass);
   border: 1px solid var(--glass-border);
@@ -500,7 +500,7 @@ body {
   position: relative;
   overflow: hidden;
 }
-
+ 
 .module-card::after {
   content: '';
   position: absolute;
@@ -510,7 +510,7 @@ body {
   opacity: 0;
   transition: opacity 0.25s;
 }
-
+ 
 .module-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
@@ -518,7 +518,7 @@ body {
   border-color: rgba(255,255,255,0.95);
 }
 .module-card:hover::after { opacity: 1; }
-
+ 
 .module-card.stress {
   background: linear-gradient(135deg, rgba(220,38,38,0.05), rgba(153,27,27,0.07));
   border-color: rgba(220,38,38,0.18);
@@ -527,7 +527,7 @@ body {
 .module-card.stress::after { opacity: 1; background: linear-gradient(90deg, #dc2626, #991b1b); }
 .module-card.stress:hover { border-color: rgba(220,38,38,0.35); box-shadow: 0 20px 60px rgba(220,38,38,0.12); }
 .module-card.stress .module-num { color: #dc2626; }
-
+ 
 .stress-badge {
   font-size: 9.5px;
   font-weight: 700;
@@ -539,16 +539,16 @@ body {
   border-radius: 20px;
   border: 1px solid rgba(220,38,38,0.18);
 }
-
+ 
 .module-card.master .module-num { color: var(--accent); }
-
+ 
 .module-num-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 7px;
 }
-
+ 
 .module-num {
   font-size: 10.5px;
   font-weight: 700;
@@ -556,7 +556,7 @@ body {
   text-transform: uppercase;
   color: var(--accent);
 }
-
+ 
 .module-title {
   font-size: 14.5px;
   font-weight: 600;
@@ -565,13 +565,13 @@ body {
   line-height: 1.35;
   letter-spacing: -0.01em;
 }
-
+ 
 .module-desc {
   font-size: 12px;
   color: var(--text-muted);
   line-height: 1.55;
 }
-
+ 
 .module-questions {
   display: flex;
   align-items: center;
@@ -580,7 +580,7 @@ body {
   font-size: 11px;
   color: var(--text-light);
 }
-
+ 
 .q-dot {
   width: 5px; height: 5px;
   border-radius: 50%;
@@ -588,7 +588,7 @@ body {
   opacity: 0.35;
   display: inline-block;
 }
-
+ 
 .done-badge {
   font-size: 9.5px;
   font-weight: 700;
@@ -600,7 +600,7 @@ body {
   border-radius: 20px;
   border: 1px solid rgba(16,185,129,0.2);
 }
-
+ 
 .module-card.completed {
   border-color: rgba(16,185,129,0.2);
 }
@@ -608,8 +608,8 @@ body {
   opacity: 1;
   background: linear-gradient(90deg, #10b981, #059669);
 }
-
-
+ 
+ 
 /* Kompass banner */
 .kompass-banner {
   width: 100%;
@@ -652,7 +652,7 @@ body {
   backdrop-filter: blur(8px);
 }
 .kompass-banner:hover .kompass-cta { background: white; box-shadow: 0 4px 12px rgba(74,108,247,0.15); }
-
+ 
 /* Modul 0 banner */
 .modul0-banner {
   width: 100%;
@@ -697,7 +697,7 @@ body {
 .modul0-banner:hover .modul0-cta { background: white; box-shadow: 0 4px 12px rgba(74,108,247,0.15); }
 .modul0-steps { display: flex; gap: 4px; margin-top: 7px; }
 .modul0-step { width: 14px; height: 3px; border-radius: 2px; background: rgba(74,108,247,0.15); }
-
+ 
 /* ═══════════════════════════════════════════════
    SHARED HEADER
 ═══════════════════════════════════════════════ */
@@ -714,7 +714,7 @@ body {
   z-index: 10;
   box-shadow: 0 1px 0 rgba(255,255,255,0.7);
 }
-
+ 
 .back-btn {
   width: 34px;
   height: 34px;
@@ -733,9 +733,9 @@ body {
   box-shadow: var(--shadow-sm);
 }
 .back-btn:hover { background: white; color: var(--text); border-color: var(--accent-border); }
-
+ 
 .header-info { flex: 1; min-width: 0; }
-
+ 
 .header-logo {
   display: flex;
   align-items: center;
@@ -783,7 +783,7 @@ body {
   text-overflow: ellipsis;
   letter-spacing: -0.01em;
 }
-
+ 
 /* View toggle */
 .view-toggle {
   display: flex;
@@ -816,9 +816,9 @@ body {
   font-weight: 600;
 }
 .toggle-btn:not(.active):hover { color: var(--text); background: rgba(255,255,255,0.7); }
-
-
-
+ 
+ 
+ 
 /* ═══════════════════════════════════════════════
    PROGRESS
 ═══════════════════════════════════════════════ */
@@ -843,7 +843,7 @@ body {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.55; }
 }
-
+ 
 /* ═══════════════════════════════════════════════
    CHAT INTERFACE — SPLIT LAYOUT
 ═══════════════════════════════════════════════ */
@@ -856,7 +856,7 @@ body {
   flex: 1;
   min-width: 0;
 }
-
+ 
 /* Main content area (video + chat side by side) */
 .chat-main {
   flex: 1;
@@ -865,7 +865,7 @@ body {
   overflow: hidden;
   min-height: 0;
 }
-
+ 
 /* ── VIDEO PANEL ── */
 #videoPanel {
   display: none;
@@ -886,7 +886,7 @@ body {
 #chatInterface.video-mode .chat-column {
   display: none;
 }
-
+ 
 .video-container {
   flex: 1;
   display: flex;
@@ -895,7 +895,7 @@ body {
   padding: 24px;
   overflow: hidden;
 }
-
+ 
 .video-placeholder {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -910,7 +910,7 @@ body {
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(15,17,32,0.35), inset 0 1px 1px rgba(255,255,255,0.05);
 }
-
+ 
 .video-placeholder::before {
   content: '';
   position: absolute;
@@ -918,14 +918,14 @@ body {
   background: radial-gradient(circle at 30% 40%, rgba(232,69,26,0.15) 0%, transparent 60%),
               radial-gradient(circle at 70% 70%, rgba(240,117,48,0.12) 0%, transparent 50%);
 }
-
+ 
 .video-grain {
   position: absolute;
   inset: 0;
   opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
 }
-
+ 
 .play-btn-wrap {
   position: relative;
   z-index: 2;
@@ -934,7 +934,7 @@ body {
   align-items: center;
   gap: 16px;
 }
-
+ 
 .play-btn {
   width: 68px;
   height: 68px;
@@ -960,14 +960,14 @@ body {
   fill: white;
   margin-left: 3px;
 }
-
+ 
 .video-label {
   font-size: 12px;
   font-weight: 500;
   color: rgba(255,255,255,0.45);
   letter-spacing: 0.05em;
 }
-
+ 
 /* ── CHAT COLUMN ── */
 .chat-column {
   flex: 1;
@@ -976,7 +976,7 @@ body {
   overflow: hidden;
   min-width: 0;
 }
-
+ 
 /* ── MESSAGES ── */
 #chat, #kompassChat {
   flex: 1;
@@ -990,16 +990,16 @@ body {
 #chat::-webkit-scrollbar, #kompassChat::-webkit-scrollbar { width: 4px; }
 #chat::-webkit-scrollbar-track, #kompassChat::-webkit-scrollbar-track { background: transparent; }
 #chat::-webkit-scrollbar-thumb, #kompassChat::-webkit-scrollbar-thumb { background: rgba(232,69,26,0.15); border-radius: 4px; }
-
+ 
 .message { display: flex; gap: 10px; animation: msgIn 0.3s ease; }
 @keyframes msgIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
+ 
 .message.user { flex-direction: row-reverse; }
 .message.bot { align-items: flex-start; }
-
+ 
 .avatar {
   width: 30px;
   height: 30px;
@@ -1026,7 +1026,7 @@ body {
   font-size: 14px;
   backdrop-filter: blur(8px);
 }
-
+ 
 .bubble {
   max-width: 76%;
   padding: 12px 16px;
@@ -1051,7 +1051,7 @@ body {
 .message.bot .bubble strong { color: var(--accent); }
 .message.user .bubble strong { color: rgba(255,255,255,0.92); }
 .bubble em { font-style: italic; }
-
+ 
 /* Summary box */
 .summary-box {
   background: linear-gradient(135deg, rgba(232,69,26,0.05), rgba(240,117,48,0.05));
@@ -1074,7 +1074,7 @@ body {
   color: var(--text);
   white-space: pre-wrap;
 }
-
+ 
 .copy-btn {
   margin-top: 12px;
   background: rgba(255,255,255,0.8);
@@ -1093,7 +1093,7 @@ body {
   backdrop-filter: blur(8px);
 }
 .copy-btn:hover { background: white; box-shadow: 0 4px 12px rgba(232,69,26,0.12); }
-
+ 
 /* Typing */
 .typing-wrap { display: flex; align-items: flex-start; gap: 10px; }
 .typing-bubble {
@@ -1120,7 +1120,7 @@ body {
   0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
   40% { transform: translateY(-5px); opacity: 1; }
 }
-
+ 
 /* Master input */
 .master-input-section {
   background: var(--glass);
@@ -1172,7 +1172,7 @@ body {
 }
 .master-btn:hover { opacity: 0.92; }
 .master-btn:active { transform: scale(0.98); }
-
+ 
 /* ── CONTEXT INPUT ── */
 .context-input-section {
   background: var(--glass);
@@ -1252,7 +1252,7 @@ body {
   transition: color 0.2s;
 }
 .ctx-skip:hover { color: var(--text-muted); }
-
+ 
 /* ── MODE SELECT ── */
 .mode-select-wrap { display: flex; gap: 14px; padding: 24px 20px; flex-direction: column; }
 .mode-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 20px 22px; cursor: pointer; transition: all 0.25s cubic-bezier(0.2,0.8,0.2,1); backdrop-filter: blur(16px); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 16px; }
@@ -1260,7 +1260,7 @@ body {
 .mode-icon { font-size: 28px; flex-shrink: 0; }
 .mode-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; letter-spacing: -0.01em; }
 .mode-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-
+ 
 /* ── FOOTER ── */
 footer {
   padding: 12px 20px 16px;
@@ -1299,7 +1299,7 @@ textarea#input:focus, textarea#kompassInput:focus {
   background: rgba(255,255,255,0.9);
 }
 textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--text-light); }
-
+ 
 #sendBtn, #kompassSendBtn {
   width: 44px;
   height: 44px;
@@ -1319,15 +1319,15 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
 #sendBtn:hover, #kompassSendBtn:hover { opacity: 0.92; box-shadow: 0 8px 24px rgba(232,69,26,0.4); }
 #sendBtn:active, #kompassSendBtn:active { transform: scale(0.95); }
 #sendBtn:disabled, #kompassSendBtn:disabled { background: #d1d5db; cursor: not-allowed; box-shadow: none; }
-
+ 
 .hint {
   font-size: 11px;
   color: var(--text-light);
   margin-top: 7px;
   text-align: center;
 }
-
-
+ 
+ 
 #kompassInterface {
   display: none;
   flex-direction: column;
@@ -1337,32 +1337,284 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
   flex: 1;
   min-width: 0;
 }
-
+ 
 /* Responsive: stack on mobile */
+/* ── MOBILE TOP BAR ── */
+.mobile-topbar {
+  display: none;
+  height: 56px;
+  min-height: 56px;
+  background: #1a1a2e;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 200;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+ 
+.mobile-topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.mobile-topbar-logo img {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  object-fit: cover;
+}
+.mobile-topbar-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: -0.01em;
+}
+ 
+.mobile-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+ 
+.mobile-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+ 
+.mobile-menu-btn {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.mobile-menu-btn:hover { background: rgba(255,255,255,0.12); }
+.mobile-menu-btn span {
+  width: 16px;
+  height: 2px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 1px;
+  display: block;
+  transition: all 0.2s;
+}
+.mobile-menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.mobile-menu-btn.open span:nth-child(2) { opacity: 0; }
+.mobile-menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+ 
+/* Mobile dropdown overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 0; right: 0;
+  background: #1a1a2e;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  z-index: 190;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.mobile-nav-overlay.open { display: flex; }
+ 
+.mobile-nav-overlay::-webkit-scrollbar { width: 3px; }
+.mobile-nav-overlay::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+ 
+.mobile-nav-section-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  padding: 12px 16px 4px;
+}
+ 
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.mobile-nav-item:hover { background: rgba(255,255,255,0.05); }
+.mobile-nav-item.active { background: rgba(232,69,26,0.12); }
+.mobile-nav-item.completed .mobile-nav-check { opacity: 1; }
+ 
+.mobile-nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.mobile-nav-item.active .mobile-nav-icon {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+}
+.mobile-nav-item.completed .mobile-nav-icon { background: rgba(16,185,129,0.15); }
+ 
+.mobile-nav-label {
+  flex: 1;
+  min-width: 0;
+}
+.mobile-nav-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mobile-nav-item.active .mobile-nav-title { color: rgba(255,255,255,0.95); }
+.mobile-nav-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.28);
+  margin-top: 1px;
+}
+ 
+.mobile-nav-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: white;
+  flex-shrink: 0;
+  opacity: 0;
+}
+ 
+.mobile-nav-footer {
+  padding: 12px 16px 16px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mobile-nav-footer-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+.mobile-nav-footer-info { flex: 1; min-width: 0; }
+.mobile-nav-footer-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.8); }
+.mobile-nav-footer-email { font-size: 10px; color: rgba(255,255,255,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mobile-logout-btn {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(239,68,68,0.7);
+  background: rgba(239,68,68,0.07);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: 7px;
+  padding: 6px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.mobile-logout-btn:hover { background: rgba(239,68,68,0.12); color: rgba(239,68,68,1); }
+ 
 @media (max-width: 700px) {
-  .sidebar { width: 100%; min-width: 0; height: auto; flex-direction: row; flex-shrink: 0; }
+  /* Hide desktop sidebar, show mobile topbar */
+  .sidebar { display: none; }
+  .mobile-topbar { display: flex; }
+ 
+  /* Stack layout vertically */
   #appShell { flex-direction: column; }
   .main-content { padding: 20px 16px 40px; }
+  .welcome-header { margin-bottom: 20px; }
+  .welcome-title { font-size: 24px; }
+ 
+  /* Module grid single column */
   .module-grid { grid-template-columns: 1fr; }
+ 
+  /* Chat adjustments */
   #videoPanel { width: 100%; min-width: 0; border-right: none; border-bottom: 1px solid var(--border); max-height: 220px; }
   .chat-main { flex-direction: column; }
   #chatInterface.split-view .chat-main { flex-direction: column; }
   .video-container { padding: 14px; }
   .play-btn { width: 52px; height: 52px; }
   .play-btn svg { width: 20px; height: 20px; }
+ 
+  /* Chat header on mobile */
+  .chat-header { padding: 10px 14px; }
+  .header-logo { display: none; }
+  .view-toggle { display: none; }
 }
 </style>
 </head>
 <body>
-
+ 
 <!-- Background blobs -->
 <div class="bg-blob bg-blob-1"></div>
 <div class="bg-blob bg-blob-2"></div>
 <div class="bg-blob bg-blob-3"></div>
-
+ 
 <!-- ═══════ APP SHELL ═══════ -->
 <div id="appShell">
-
+ 
+  <!-- ── MOBILE TOP BAR (only visible on small screens) ── -->
+  <div class="mobile-topbar" id="mobileTopbar">
+    <div class="mobile-topbar-logo">
+      <img src="/dml_favicon.png" alt="DML">
+      <span class="mobile-topbar-brand">Digitales Marketing</span>
+    </div>
+    <div class="mobile-topbar-right">
+      <div class="mobile-user-avatar" id="mobileUserAvatar">?</div>
+      <div class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ── MOBILE NAV DROPDOWN ── -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay">
+    <div id="mobileNavItems"><!-- built by JS --></div>
+    <div class="mobile-nav-footer">
+      <div class="mobile-nav-footer-avatar" id="mobileNavAvatar">?</div>
+      <div class="mobile-nav-footer-info">
+        <div class="mobile-nav-footer-name" id="mobileNavName">—</div>
+        <div class="mobile-nav-footer-email" id="mobileNavEmail">—</div>
+      </div>
+      <div class="mobile-logout-btn" onclick="window.location.href='/api/logout'">Logout</div>
+    </div>
+  </div>
+ 
   <!-- ── SIDEBAR ── -->
   <nav class="sidebar" id="sidebar">
     <div class="sidebar-logo">
@@ -1372,11 +1624,11 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
         <div class="sidebar-logo-sub">Lernen</div>
       </div>
     </div>
-
+ 
     <div class="sidebar-nav" id="sidebarNav">
       <!-- Built by JS -->
     </div>
-
+ 
     <!-- User area -->
     <div class="sidebar-user" id="sidebarUserArea">
       <div class="user-popup" id="userPopup">
@@ -1399,7 +1651,7 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
       </div>
     </div>
   </nav>
-
+ 
   <!-- ── MAIN CONTENT (module selector) ── -->
   <div class="main-content" id="mainContent">
     <div id="moduleSelect">
@@ -1409,7 +1661,7 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
         </div>
         <div class="welcome-emoji">👋</div>
       </div>
-
+ 
       <div class="kompass-banner" onclick="openKompassFromNav()">
         <div class="kompass-left">
           <span class="kompass-icon-wrap">🧭</span>
@@ -1420,7 +1672,7 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
         </div>
         <div class="kompass-cta">Problem eingrenzen →</div>
       </div>
-
+ 
       <div id="modul0Banner" class="modul0-banner" onclick="openModul0()">
         <div class="modul0-left">
           <span style="font-size:26px;flex-shrink:0;">🚀</span>
@@ -1433,11 +1685,11 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
         </div>
         <div class="modul0-cta" id="modul0Cta">Loslegen →</div>
       </div>
-
+ 
       <div class="module-grid" id="moduleGrid"></div>
     </div>
   </div>
-
+ 
   <!-- ── KOMPASS INTERFACE (inside shell, replaces main content) ── -->
   <div id="kompassInterface">
     <div class="chat-header">
@@ -1466,11 +1718,11 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
       <div class="hint">Enter senden · Shift+Enter neue Zeile</div>
     </footer>
   </div>
-
-
+ 
+ 
   <!-- ── CHAT INTERFACE (inside shell) ── -->
   <div id="chatInterface">
-
+ 
     <div class="chat-header">
       <button class="back-btn" onclick="goBack()">←</button>
       <div class="header-info">
@@ -1486,12 +1738,12 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
         <div class="header-logo-icon"><img src="/dml_favicon.png" alt="DML"></div>
       </div>
     </div>
-
+ 
     <div class="progress-wrap" id="progressWrap"></div>
-
+ 
     <!-- Main content: video + chat side by side -->
     <div class="chat-main">
-
+ 
       <!-- VIDEO PANEL (hidden by default) -->
       <div id="videoPanel">
         <div class="video-container">
@@ -1508,7 +1760,7 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
           </div>
         </div>
       </div>
-
+ 
       <!-- CHAT COLUMN -->
       <div class="chat-column">
         <div id="modeSelectSection" style="display:none;">
@@ -1523,7 +1775,7 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
             </div>
           </div>
         </div>
-
+ 
         <div id="masterInputSection" style="display:none;">
           <div class="master-input-section">
             <label>Deine Modul-Zusammenfassungen (0–11) hier reinkopieren</label>
@@ -1531,9 +1783,9 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
             <button class="master-btn" onclick="startMaster()">Plan herleiten →</button>
           </div>
         </div>
-
+ 
         <div id="chat"></div>
-
+ 
         <footer>
           <div class="input-row">
             <textarea id="input" placeholder="Schreib einfach drauf los …" rows="1"></textarea>
@@ -1542,17 +1794,17 @@ textarea#input::placeholder, textarea#kompassInput::placeholder { color: var(--t
           <div class="hint">Enter senden · Shift+Enter neue Zeile</div>
         </footer>
       </div>
-
+ 
     </div>
   </div>
-
+ 
 </div>
-
+ 
 <script>
 // ─── Auth check + load user ────────────────────────────────────────────────
 let currentUserEmail = '';
 let currentUserName = '';
-
+ 
 (async () => {
   try {
     const res = await fetch('/api/auth');
@@ -1567,34 +1819,44 @@ let currentUserName = '';
     buildSidebarNav();
   } catch { window.location.href = '/login'; }
 })();
-
+ 
 function emailToName(email) {
   if (!email) return 'User';
   const local = email.split('@')[0];
   return local.charAt(0).toUpperCase() + local.slice(1).replace(/[._]/g, ' ');
 }
-
+ 
 function getInitials(name) {
   const parts = name.trim().split(' ');
   if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
   return name.slice(0, 2).toUpperCase();
 }
-
+ 
 function renderUserArea() {
-  document.getElementById('userName').textContent = currentUserName || currentUserEmail || 'User';
-  document.getElementById('userEmailDisplay').textContent = currentUserEmail || '—';
-  document.getElementById('popupName').textContent = currentUserName || currentUserEmail || 'User';
-  document.getElementById('popupEmail').textContent = currentUserEmail || '—';
+  const name = currentUserName || currentUserEmail || 'User';
+  const email = currentUserEmail || '—';
+  const initials = getInitials(name);
+ 
+  // Desktop sidebar
+  document.getElementById('userName').textContent = name;
+  document.getElementById('userEmailDisplay').textContent = email;
+  document.getElementById('popupName').textContent = name;
+  document.getElementById('popupEmail').textContent = email;
   document.getElementById('welcomeTitle').textContent = 'Welcome back!';
-  const initials = getInitials(currentUserName || currentUserEmail || 'U');
   document.getElementById('userAvatar').textContent = initials;
+ 
+  // Mobile topbar + dropdown footer
+  document.getElementById('mobileUserAvatar').textContent = initials;
+  document.getElementById('mobileNavAvatar').textContent = initials;
+  document.getElementById('mobileNavName').textContent = name;
+  document.getElementById('mobileNavEmail').textContent = email;
 }
-
+ 
 function toggleUserPopup() {
   const popup = document.getElementById('userPopup');
   popup.classList.toggle('open');
 }
-
+ 
 // Close popup on outside click
 document.addEventListener('click', (e) => {
   const area = document.getElementById('sidebarUserArea');
@@ -1602,7 +1864,7 @@ document.addEventListener('click', (e) => {
     document.getElementById('userPopup')?.classList.remove('open');
   }
 });
-
+ 
 // ─── Sidebar nav builder ────────────────────────────────────────────────────
 const NAV_ICONS = {
   kompass: '🧭',
@@ -1610,11 +1872,11 @@ const NAV_ICONS = {
   6: '🌱', 7: '📡', 8: '📊', 9: '🎨', 10: '🤝', 11: '🛒',
   master: '★', stress: '⚡'
 };
-
+ 
 function buildSidebarNav() {
   const nav = document.getElementById('sidebarNav');
   nav.innerHTML = '';
-
+ 
   // Kompass
   const kompassItem = document.createElement('div');
   kompassItem.className = 'nav-item' + (currentView === 'kompass' ? ' active' : '');
@@ -1627,13 +1889,13 @@ function buildSidebarNav() {
       <div class="nav-label-sub">Problem eingrenzen</div>
     </div>`;
   nav.appendChild(kompassItem);
-
+ 
   // Module label
   const label = document.createElement('div');
   label.className = 'nav-section-label';
   label.textContent = 'Module';
   nav.appendChild(label);
-
+ 
   // All modules
   MODULES.forEach(mod => {
     const key = mod.isMaster ? 'master' : mod.isStress ? 'stress' : mod.num;
@@ -1647,17 +1909,17 @@ function buildSidebarNav() {
     item.className = cls;
     item.id = 'nav-' + key;
     item.onclick = () => openModule(mod);
-
+ 
     const icon = NAV_ICONS[mod.isMaster ? 'master' : mod.isStress ? 'stress' : mod.num] || '📄';
     const numLabel = mod.isMaster ? 'Modul 12' : mod.isStress ? 'Stresstest' : 'Modul ' + mod.num;
-
+ 
     let dotsHtml = '';
     if (!mod.isStress && !mod.isMaster && mod.questions > 0) {
       const store = loadStore();
       const answered = store.chats?.[mod.num]?.answerCount || 0;
       dotsHtml = `<div class="nav-progress">${Array(mod.questions).fill(0).map((_, i) => `<div class="nav-prog-dot${i < answered ? ' done' : ''}"></div>`).join('')}</div>`;
     }
-
+ 
     item.innerHTML = `
       <div class="nav-icon">${icon}</div>
       <div class="nav-label">
@@ -1669,10 +1931,68 @@ function buildSidebarNav() {
     nav.appendChild(item);
   });
 }
-
-// ─── View toggle (Video / Chat) ───────────────────────────────────────────────
+ 
+// ─── Mobile nav ──────────────────────────────────────────────────────────────
+function toggleMobileMenu() {
+  const overlay = document.getElementById('mobileNavOverlay');
+  const btn = document.getElementById('mobileMenuBtn');
+  const isOpen = overlay.classList.contains('open');
+  overlay.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  if (!isOpen) buildMobileNav();
+}
+ 
+function closeMobileMenu() {
+  document.getElementById('mobileNavOverlay').classList.remove('open');
+  document.getElementById('mobileMenuBtn').classList.remove('open');
+}
+ 
+function buildMobileNav() {
+  const container = document.getElementById('mobileNavItems');
+  container.innerHTML = '';
+ 
+  const kompassItem = document.createElement('div');
+  kompassItem.className = 'mobile-nav-item' + (currentView === 'kompass' ? ' active' : '');
+  kompassItem.onclick = () => { closeMobileMenu(); openKompassFromNav(); };
+  kompassItem.innerHTML = `
+    <div class="mobile-nav-icon">🧭</div>
+    <div class="mobile-nav-label">
+      <div class="mobile-nav-title">Kompass</div>
+      <div class="mobile-nav-sub">Problem eingrenzen</div>
+    </div>`;
+  container.appendChild(kompassItem);
+ 
+  const label = document.createElement('div');
+  label.className = 'mobile-nav-section-label';
+  label.textContent = 'Module';
+  container.appendChild(label);
+ 
+  MODULES.forEach(mod => {
+    const key = mod.isMaster ? 'master' : mod.isStress ? 'stress' : mod.num;
+    const done = !!getSummary(key);
+    const isActive = currentModule && (mod.isMaster ? currentModule.isMaster : mod.isStress ? currentModule.isStress : currentModule.num === mod.num);
+    const item = document.createElement('div');
+    let cls = 'mobile-nav-item';
+    if (isActive) cls += ' active';
+    if (done) cls += ' completed';
+    item.className = cls;
+    item.onclick = () => { closeMobileMenu(); openModule(mod); };
+    const icon = NAV_ICONS[mod.isMaster ? 'master' : mod.isStress ? 'stress' : mod.num] || '📄';
+    const numLabel = mod.isMaster ? 'Modul 12' : mod.isStress ? 'Stresstest' : 'Modul ' + mod.num;
+    item.innerHTML = `
+      <div class="mobile-nav-icon">${icon}</div>
+      <div class="mobile-nav-label">
+        <div class="mobile-nav-title">${mod.title}</div>
+        <div class="mobile-nav-sub">${numLabel}</div>
+      </div>
+      ${done ? '<div class="mobile-nav-check">✓</div>' : ''}`;
+    container.appendChild(item);
+  });
+}
+ 
+ 
 let videoMode = 'chat';
-
+ 
 function setView(mode) {
   videoMode = mode;
   const vp = document.getElementById('videoPanel');
@@ -1691,7 +2011,7 @@ function setView(mode) {
     btnVideo.classList.remove('active');
   }
 }
-
+ 
 // ─── localStorage (user-scoped) ───────────────────────────────────────────────
 // Key is scoped per email so different users never share data
 function storeKey() {
@@ -1708,7 +2028,7 @@ function getAllSummaries() { const s = loadStore(); const sums = s.summaries || 
 function clearModule(modNum) { const s = loadStore(); if (s.summaries) delete s.summaries[modNum]; if (s.chats) delete s.chats[modNum]; saveStore(s); }
 function pushProgress(moduleKey, summaryText, chatMsgs, answerCount) { fetch('/api/save-progress', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ moduleKey: String(moduleKey), summaryText, chatMsgs, answerCount }) }).catch(() => {}); }
 async function syncFromServer() { try { const res = await fetch('/api/load-progress'); if (!res.ok) return; const d = await res.json(); const local = loadStore(); if (d.summaries) { Object.keys(d.summaries).forEach(k => { if (!local.summaries?.[k]) { if (!local.summaries) local.summaries = {}; local.summaries[k] = d.summaries[k]; } }); } if (d.chats) { Object.keys(d.chats).forEach(k => { const localCount = local.chats?.[k]?.answerCount || 0; const serverCount = d.chats[k]?.answerCount || 0; if (serverCount > localCount) { if (!local.chats) local.chats = {}; local.chats[k] = d.chats[k]; } }); } saveStore(local); } catch {} }
-
+ 
 // ─── MODULES ──────────────────────────────────────────────────────────────────
 const MODULES = [
   { num: 0, title: "Willkommen & Orientierung", desc: "Deinen aktuellen Marketing-Stand erfassen und Ausgangsbasis für alle folgenden Module festlegen.", questions: 5, summaryTitle: "MODUL 0 – Mein Kontext", systemPrompt: `Du bist der Coach hinter Constantins Marketing-Kurs — direkt, warm, ohne Aufwärmen. Du denkst in Logikketten, nicht in Aufzählungen. Du redest wie Constantin: "halt" kommt natürlich, du mischst Deutsch und Englisch wenn es passt, du zeigst Unsicherheit wenn sie da ist. Kein Corporate-Bla, kein Hochglanz-Fazit.\n\nModul 0 — Orientierung. Bevor irgendwas anderes passiert, müssen wir wissen wo der Mensch gerade steht. Nämlich: ohne Ausgangssituation kann man nichts herleiten.\n\nStelle diese 5 Fragen NACHEINANDER. Eine pro Turn. Warte auf die Antwort bevor du weitermachst.\n\nFRAGEN:\n1. Kurz: Was machst du — und für wen?\n2. Was läuft im Marketing gerade — und was davon funktioniert deiner Einschätzung nach wirklich?\n3. Was nervt dich am meisten an deiner aktuellen Marketing-Situation?\n4. Was soll sich nach diesem Kurs konkret verändert haben?\n5. Eher B2B, B2C — oder beides?\n\nNACH DER 5. ANTWORT: Fass alles unter dem Titel "MODUL 0 – Mein Kontext" zusammen. Klar, strukturiert, **Fettschrift** für die wichtigsten Punkte. Ende nicht mit einem Motivationssatz — ende mit einem Gedanken der sitzt. Antworte auf Deutsch.` },
@@ -1726,14 +2046,14 @@ const MODULES = [
   { num: 12, title: "Deine Master-Strategie", desc: "Alle Erkenntnisse aus 12 Modulen zusammenführen — und daraus deinen persönlichen 90-Tage-Plan herleiten.", questions: 0, summaryTitle: "MEIN PERSÖNLICHER MARKETING-PLAN", isMaster: true, systemPrompt: `Du bist der Coach hinter Constantins Marketing-Kurs. Direkt, warm, du denkst in Logikketten und leitest her. Kein Corporate-Bla, keine Hochglanz-Zusammenfassungen, keine Motivationssprache. Du klingst wie Constantin: "halt", "nämlich", "so doof das klingt", Englisch wenn es natürlich kommt.\n\nEin Unternehmer hat 12 Module abgeschlossen und dir alle seine Zusammenfassungen gegeben. Jetzt leitest du seinen persönlichen 90-Tage-Marketing-Plan her — nicht als generische Empfehlung, sondern spezifisch auf das was er dir gesagt hat.\n\nDer Plan enthält:\n1. **AUSGANGSSITUATION** — Kurz: wer ist das, was bietet er an, wo steht er gerade wirklich. Stärken und Lücken klar benennen.\n2. **DIE 3 ECHTEN HEBEL** — Nicht was theoretisch möglich wäre, sondern was für genau diese Person zuerst Sinn macht. Mit Herleitung.\n3. **90-TAGE-PLAN** — Monat 1 (Fundament — was muss zuerst sitzen), Monat 2 (Aktivierung — welche 1-2 Kanäle, wie), Monat 3 (Optimieren was funktioniert, stoppen was nicht).\n4. **3 FOKUS-KANÄLE** — Warum genau diese, warum in dieser Reihenfolge.\n5. **KPIs** — 3-5 Kennzahlen die wirklich zählen. Keine Vanity Metrics.\n6. **BUDGET-RAHMEN** — Wie aufteilen — Paid, Organic, Testing. Konkret.\n7. **DIESE WOCHE** — 3 Dinge die sofort umsetzbar sind. Nichts Abstraktes.\n\nKeine allgemeinen Marketing-Floskeln. Keine Sätze die für jeden gelten könnten. Alles aus dem was dieser Mensch dir gesagt hat. **Fettschrift** für Schlüsselempfehlungen. Ende mit einem Gedanken der sitzt — kein Motivationssatz. Antworte auf Deutsch.` },
   { num: 'stress', title: "Stresstest", desc: "Kein Lob, keine Rücksicht. Beschreib deine Marketing-Strategie — und bekomm herausgefunden wo sie wirklich Löcher hat.", questions: 0, summaryTitle: null, isStress: true, systemPrompt: `Du bist ein knallharter Marketing-Kritiker — der Advocatus Diaboli. Deine einzige Aufgabe: die Marketing-Strategie des Unternehmers auseinandernehmen und testen ob wirklich Substanz dahinter ist.\n\nDu bist NICHT freundlich. Du bist fair — aber schonungslos. Du redest wie jemand der schon hundert solcher Strategien gesehen hat und genau weiß wo die meisten scheitern.\n\nDEIN ANSATZ:\n- Hör dir die Strategie an\n- Frag sofort nach dem schwächsten Punkt den du erkennst\n- Bohre nach — wenn die Antwort vage ist, sag das direkt\n- Teste ob wirklich durchgedacht ist was behauptet wird\n- Decke auf wo Wunschdenken statt Substanz steckt\n- Keine Komplimente außer wenn wirklich verdient\n- Stelle maximal eine Frage pro Turn — aber die sitzt\n\nSTIL:\n- Direkt, klar, keine Weichspüler\n- "Puh." wenn etwas wirklich schwach ist\n- "Guck mal" wenn du einen Widerspruch aufzeigst\n- Kurze Sätze. Keine Romane.\n- Wenn etwas wirklich gut ist: sag es — aber kurz, dann weiter zum nächsten Loch\n- Antworte auf Deutsch\n- Misch Englisch natürlich ein wenn es passt\n\nStarte damit den Nutzer kurz zu begrüßen — hart aber fair — und bitte ihn seine Marketing-Strategie in ein paar Sätzen zu beschreiben. Dann gehst du ran.` }
 ];
-
+ 
 let currentModule = null;
 let messages = [];
 let userAnswerCount = 0;
 let summaryText = '';
-
+ 
 const grid = document.getElementById('moduleGrid');
-
+ 
 function updateModul0Banner() {
   const mod0 = MODULES[0];
   const done = !!getSummary(0);
@@ -1761,9 +2081,9 @@ function updateModul0Banner() {
     steps.appendChild(d);
   }
 }
-
+ 
 function openModul0() { openModule(MODULES[0]); }
-
+ 
 function buildGrid() {
   grid.innerHTML = '';
   updateModul0Banner();
@@ -1804,7 +2124,7 @@ function buildGrid() {
   });
 }
 // Grid and sidebar are now built after auth resolves (see auth block above)
-
+ 
 function openModule(mod) {
   currentModule = mod;
   currentView = 'module';
@@ -1812,13 +2132,13 @@ function openModule(mod) {
   userAnswerCount = 0;
   const modKey = mod.isMaster ? 'master' : mod.isStress ? 'stress' : mod.num;
   summaryText = getSummary(modKey) || '';
-
+ 
   // Reset view to chat mode
   setView('chat');
-
+ 
   // Update video label
   document.getElementById('videoModuleNum').textContent = mod.isMaster ? '12' : mod.isStress ? 'Stresstest' : mod.num;
-
+ 
   document.getElementById('moduleSelect').style.display = 'none';
   document.getElementById('mainContent').style.display = 'none';
   const ci = document.getElementById('chatInterface');
@@ -1826,7 +2146,7 @@ function openModule(mod) {
   document.getElementById('kompassInterface').style.display = 'none';
   document.getElementById('chat').innerHTML = '';
   buildSidebarNav();
-
+ 
   if (mod.isStress) {
     document.getElementById('headerModule').textContent = '⚡ Stresstest';
     document.getElementById('headerModule').style.color = '#dc2626';
@@ -1838,7 +2158,7 @@ function openModule(mod) {
     document.getElementById('headerModule').style.color = '';
   }
   document.getElementById('headerTitle').textContent = mod.title;
-
+ 
   const pw = document.getElementById('progressWrap');
   pw.innerHTML = '';
   if (!mod.isStress && mod.questions > 0) {
@@ -1849,10 +2169,10 @@ function openModule(mod) {
       pw.appendChild(s);
     }
   }
-
+ 
   const masterSection = document.getElementById('masterInputSection');
   const footer = document.querySelector('#chatInterface footer');
-
+ 
   if (mod.isMaster) {
     const allSums = getAllSummaries();
     if (allSums) document.getElementById('masterContext').value = allSums;
@@ -1880,26 +2200,26 @@ function openModule(mod) {
     }
   }
 }
-
+ 
 function chooseVideo() {
   document.getElementById('modeSelectSection').style.display = 'none';
   document.querySelector('#chatInterface footer').style.display = 'block';
   setView('video');
   initChat();
 }
-
+ 
 function chooseChat() {
   document.getElementById('modeSelectSection').style.display = 'none';
   document.querySelector('#chatInterface footer').style.display = 'block';
   initChat();
 }
-
+ 
 function skipContext() {
   document.getElementById('modeSelectSection').style.display = 'none';
   document.querySelector('#chatInterface footer').style.display = 'block';
   initChat();
 }
-
+ 
 async function startMaster() {
   const context = document.getElementById('masterContext').value.trim();
   if (!context) { alert('Bitte füge deine Modul-Zusammenfassungen ein.'); return; }
@@ -1910,7 +2230,7 @@ async function startMaster() {
   addMsg('user', 'Modul-Zusammenfassungen eingefügt. Bitte erstelle meinen persönlichen Marketing-Plan.');
   await fetchReply();
 }
-
+ 
 function restoreChat(saved) {
   messages = saved.msgs;
   userAnswerCount = saved.answerCount;
@@ -1920,7 +2240,7 @@ function restoreChat(saved) {
   }
   updateProgress();
 }
-
+ 
 async function initChat() {
   showTyping();
   const initMsg = currentModule.isStress
@@ -1951,7 +2271,7 @@ async function initChat() {
     addMsg('bot', 'Verbindungsfehler. Bitte versuche es erneut.');
   }
 }
-
+ 
 function addMsg(role, text, isRestore = false) {
   const chat = document.getElementById('chat');
   const wrap = document.createElement('div');
@@ -1965,7 +2285,7 @@ function addMsg(role, text, isRestore = false) {
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   bubble.innerHTML = formatText(text);
-
+ 
   const modKey = currentModule.isMaster ? 'master' : currentModule.isStress ? 'stress' : currentModule.num;
   if (role === 'bot' && currentModule && !currentModule.isStress && currentModule.summaryTitle && text.includes(currentModule.summaryTitle)) {
     summaryText = text;
@@ -1984,27 +2304,27 @@ function addMsg(role, text, isRestore = false) {
       </div>`;
     bubble.appendChild(sbox);
   }
-
+ 
   wrap.appendChild(av);
   wrap.appendChild(bubble);
   chat.appendChild(wrap);
   chat.scrollTop = chat.scrollHeight;
 }
-
+ 
 function copySummary() {
   navigator.clipboard.writeText(summaryText).then(() => {
     const btn = document.querySelector('.copy-btn');
     if (btn) { btn.textContent = '✓ Kopiert!'; setTimeout(() => btn.textContent = '📋 Zusammenfassung kopieren', 2000); }
   });
 }
-
+ 
 function getNextSteps() {
   const prompt = `Basierend auf dieser Zusammenfassung: Was sind meine 3 konkreten nächsten Schritte für diese Woche? Sei direkt und spezifisch — keine Theorie, nur was ich morgen anfangen kann.`;
   messages.push({ role: 'user', content: prompt });
   addMsg('user', '→ Was jetzt?');
   fetchReply();
 }
-
+ 
 function formatText(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -2014,7 +2334,7 @@ function formatText(text) {
 function escapeHtml(text) {
   return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-
+ 
 function showTyping() {
   const chat = document.getElementById('chat');
   const wrap = document.createElement('div');
@@ -2031,7 +2351,7 @@ function showTyping() {
   chat.scrollTop = chat.scrollHeight;
 }
 function removeTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
-
+ 
 function updateProgress() {
   if (!currentModule || currentModule.questions === 0) return;
   for (let i = 0; i < currentModule.questions; i++) {
@@ -2042,7 +2362,7 @@ function updateProgress() {
     else el.className = 'progress-step';
   }
 }
-
+ 
 async function fetchReply() {
   showTyping();
   try {
@@ -2067,7 +2387,7 @@ async function fetchReply() {
   }
   document.getElementById('sendBtn').disabled = false;
 }
-
+ 
 async function send() {
   const input = document.getElementById('input');
   const text = input.value.trim();
@@ -2085,7 +2405,7 @@ async function send() {
   }
   await fetchReply();
 }
-
+ 
 function resetModule() {
   if (!confirm('Modul wirklich neu starten? Der gespeicherte Fortschritt wird gelöscht.')) return;
   const modKey = currentModule.isMaster ? 'master' : currentModule.isStress ? 'stress' : currentModule.num;
@@ -2093,12 +2413,12 @@ function resetModule() {
   buildGrid();
   openModule(currentModule);
 }
-
+ 
 // ─── KOMPASS ─────────────────────────────────────────────────────────────────
 const KOMPASS_SYSTEM = `Du bist der Diagnose-Coach hinter Constantins Marketing-Kurs. Deine Aufgabe: das echte Kernproblem verstehen — und dann herleiten welches Modul wirklich hilft. Nicht raten. Herleiten.
-
+ 
 Du klingst wie Constantin: direkt, warm, ohne Aufwärmen. "Halt" kommt natürlich. Du mischst Deutsch und Englisch wenn es passt. Du zeigst Unsicherheit wenn du sie hast. Kein Hochglanz, kein Corporate-Bla. Keine Motivationssprache.
-
+ 
 KURSINHALT (kenne das auswendig — das ist die Basis für deine Empfehlung):
 - Modul 0: Orientierung — Marketing-Selbstaudit, Ausgangssituation erfassen
 - Modul 1: Was ist Marketing? — Funnel-Grundlagen, Strategie vs. Taktik, warum Leute Geld verbrennen
@@ -2113,20 +2433,20 @@ KURSINHALT (kenne das auswendig — das ist die Basis für deine Empfehlung):
 - Modul 10: B2B-Marketing — Sales Cycles, LinkedIn, Account-Based Marketing, Thought Leadership
 - Modul 11: B2C-Marketing — Impulskauf vs. Überlegter Kauf, E-Commerce Funnel, Influencer, CRO
 - Modul 12: Master-Strategie — Alle Erkenntnisse zu einem 90-Tage-Plan zusammenführen
-
+ 
 ABLAUF — exakt 3 Phasen:
-
+ 
 PHASE 1 — PROBLEM ERFASSEN (1 Frage):
 Direkt fragen was nicht läuft. Kein Aufwärmen. "Moin, was läuft gerade nicht rund?" reicht.
-
+ 
 PHASE 2 — URSACHE VERSTEHEN (1-2 Warum-Fragen):
 Tiefer gehen. Nämlich: das was jemand als Problem beschreibt ist oft nicht das eigentliche Problem. Frag nach.
-
+ 
 PHASE 3 — DIAGNOSE & MODULEMPFEHLUNG:
 Wenn du das Problem verstehst: kurze Diagnose, dann 2-3 Modul-Empfehlungen. Herleiten warum.
-
+ 
 Deine Empfehlung muss dieses JSON-Format enthalten — EXAKT so:
-
+ 
 [EMPFEHLUNG]
 {
   "diagnose": "Kurze Diagnose in 1-2 Sätzen.",
@@ -2136,13 +2456,13 @@ Deine Empfehlung muss dieses JSON-Format enthalten — EXAKT so:
   ]
 }
 [/EMPFEHLUNG]
-
+ 
 Maximal 4 Fragen insgesamt. Kein "Danke für deine Antwort!". Antworte auf Deutsch.`;
-
+ 
 let kompassMsgs = [];
 let kompassPhase = 0;
 let kompassQCount = 0;
-
+ 
 function setKompassPhase(p) {
   kompassPhase = p;
   for (let i = 0; i < 4; i++) {
@@ -2153,7 +2473,7 @@ function setKompassPhase(p) {
     else el.className = 'kp-dot';
   }
 }
-
+ 
 function parseRec(text) {
   const m = text.match(/\[EMPFEHLUNG\]([\s\S]*?)\[\/EMPFEHLUNG\]/);
   if (!m) return null;
@@ -2162,7 +2482,7 @@ function parseRec(text) {
 function stripRec(text) {
   return text.replace(/\[EMPFEHLUNG\][\s\S]*?\[\/EMPFEHLUNG\]/g, '').trim();
 }
-
+ 
 function kompassAddMsg(role, text) {
   const chat = document.getElementById('kompassChat');
   const rec = role === 'bot' ? parseRec(text) : null;
@@ -2207,7 +2527,7 @@ function kompassAddMsg(role, text) {
   chat.appendChild(wrap);
   chat.scrollTop = chat.scrollHeight;
 }
-
+ 
 function kompassShowTyping() {
   const chat = document.getElementById('kompassChat');
   const w = document.createElement('div');
@@ -2228,7 +2548,7 @@ function kompassRemoveTyping() {
   const t = document.getElementById('ktyping');
   if (t) t.remove();
 }
-
+ 
 async function kompassFetch() {
   kompassShowTyping();
   try {
@@ -2255,7 +2575,7 @@ async function kompassFetch() {
   }
   document.getElementById('kompassSendBtn').disabled = false;
 }
-
+ 
 async function kompassSend() {
   const inp = document.getElementById('kompassInput');
   const text = inp.value.trim();
@@ -2267,7 +2587,7 @@ async function kompassSend() {
   kompassAddMsg('user', text);
   await kompassFetch();
 }
-
+ 
 async function openKompass() {
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('moduleSelect').style.display = 'none';
@@ -2280,7 +2600,7 @@ async function openKompass() {
   kompassMsgs.push({ role: 'user', content: 'Starte. Begrüß mich in einem Satz — direkt, kein Aufwärmen — und frag sofort was nicht läuft.' });
   await kompassFetch();
 }
-
+ 
 document.getElementById('kompassInput').addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kompassSend(); }
 });
@@ -2289,29 +2609,29 @@ document.getElementById('kompassInput').addEventListener('input', () => {
   inp.style.height = 'auto';
   inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
 });
-
+ 
 // ─── NAVIGATION ──────────────────────────────────────────────────────────────
 let currentView = 'home'; // 'home', 'kompass', 'module'
-
+ 
 function showMainContent() {
   document.getElementById('mainContent').style.display = 'flex';
   document.getElementById('moduleSelect').style.display = 'flex';
   document.getElementById('chatInterface').style.display = 'none';
   document.getElementById('kompassInterface').style.display = 'none';
 }
-
+ 
 function showChatInterface() {
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('chatInterface').style.display = 'flex';
   document.getElementById('kompassInterface').style.display = 'none';
 }
-
+ 
 function showKompassInterface() {
   document.getElementById('mainContent').style.display = 'none';
   document.getElementById('chatInterface').style.display = 'none';
   document.getElementById('kompassInterface').style.display = 'flex';
 }
-
+ 
 function goBack() {
   currentModule = null;
   currentView = 'home';
@@ -2321,13 +2641,13 @@ function goBack() {
   buildGrid();
   buildSidebarNav();
 }
-
+ 
 function openKompassFromNav() {
   openKompass();
 }
-
-
-
+ 
+ 
+ 
 const input = document.getElementById('input');
 input.addEventListener('input', () => {
   input.style.height = 'auto';
