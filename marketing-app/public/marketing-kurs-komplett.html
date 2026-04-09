@@ -1194,12 +1194,14 @@ function setView(mode) {
 const STORE_KEY = 'mk_coach_v1';
 function loadStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; } }
 function saveStore(store) { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch {} }
-function saveSummary(modNum, text) { const s = loadStore(); if (!s.summaries) s.summaries = {}; s.summaries[modNum] = text; saveStore(s); }
+function saveSummary(modNum, text) { const s = loadStore(); if (!s.summaries) s.summaries = {}; s.summaries[modNum] = text; saveStore(s); pushProgress(modNum, text, s.chats?.[modNum]?.msgs || [], s.chats?.[modNum]?.answerCount || 0); }
 function getSummary(modNum) { return loadStore().summaries?.[modNum] || null; }
-function saveChat(modNum, msgs, answerCount) { const s = loadStore(); if (!s.chats) s.chats = {}; s.chats[modNum] = { msgs, answerCount }; saveStore(s); }
+function saveChat(modNum, msgs, answerCount) { const s = loadStore(); if (!s.chats) s.chats = {}; s.chats[modNum] = { msgs, answerCount }; saveStore(s); pushProgress(modNum, s.summaries?.[modNum] || null, msgs, answerCount); }
 function getChat(modNum) { return loadStore().chats?.[modNum] || null; }
 function getAllSummaries() { const s = loadStore(); const sums = s.summaries || {}; return Object.keys(sums).sort((a,b)=>Number(a)-Number(b)).map(k=>sums[k]).join('\n\n---\n\n'); }
 function clearModule(modNum) { const s = loadStore(); if (s.summaries) delete s.summaries[modNum]; if (s.chats) delete s.chats[modNum]; saveStore(s); }
+function pushProgress(moduleKey, summaryText, chatMsgs, answerCount) { fetch('/api/save-progress', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ moduleKey: String(moduleKey), summaryText, chatMsgs, answerCount }) }).catch(() => {}); }
+async function syncFromServer() { try { const res = await fetch('/api/load-progress'); if (!res.ok) return; const d = await res.json(); const local = loadStore(); if (d.summaries) local.summaries = { ...(local.summaries || {}), ...d.summaries }; if (d.chats) local.chats = { ...(local.chats || {}), ...d.chats }; saveStore(local); } catch {} }
 
 // ─── MODULES ──────────────────────────────────────────────────────────────────
 const MODULES = [
@@ -1295,7 +1297,7 @@ function buildGrid() {
     grid.appendChild(card);
   });
 }
-buildGrid();
+syncFromServer().then(() => buildGrid());
 
 function openModule(mod) {
   currentModule = mod;
