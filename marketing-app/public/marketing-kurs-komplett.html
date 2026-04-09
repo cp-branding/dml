@@ -1561,6 +1561,10 @@ let currentUserName = '';
     currentUserEmail = data.email || '';
     currentUserName = data.name || emailToName(currentUserEmail);
     renderUserArea();
+    // Now that email is known, sync server progress into the correct user-scoped store
+    await syncFromServer();
+    buildGrid();
+    buildSidebarNav();
   } catch { window.location.href = '/login'; }
 })();
 
@@ -1688,10 +1692,14 @@ function setView(mode) {
   }
 }
 
-// ─── localStorage ─────────────────────────────────────────────────────────────
-const STORE_KEY = 'mk_coach_v1';
-function loadStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; } }
-function saveStore(store) { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch {} }
+// ─── localStorage (user-scoped) ───────────────────────────────────────────────
+// Key is scoped per email so different users never share data
+function storeKey() {
+  // Use email if available, fall back to generic key until auth resolves
+  return currentUserEmail ? 'mk_coach_v2_' + currentUserEmail : 'mk_coach_v2_anon';
+}
+function loadStore() { try { return JSON.parse(localStorage.getItem(storeKey())) || {}; } catch { return {}; } }
+function saveStore(store) { try { localStorage.setItem(storeKey(), JSON.stringify(store)); } catch {} }
 function saveSummary(modNum, text) { const s = loadStore(); if (!s.summaries) s.summaries = {}; s.summaries[modNum] = text; saveStore(s); pushProgress(modNum, text, s.chats?.[modNum]?.msgs || [], s.chats?.[modNum]?.answerCount || 0); }
 function getSummary(modNum) { return loadStore().summaries?.[modNum] || null; }
 function saveChat(modNum, msgs, answerCount) { const s = loadStore(); if (!s.chats) s.chats = {}; s.chats[modNum] = { msgs, answerCount }; saveStore(s); pushProgress(modNum, s.summaries?.[modNum] || null, msgs, answerCount); }
@@ -1795,7 +1803,7 @@ function buildGrid() {
     grid.appendChild(card);
   });
 }
-syncFromServer().then(() => { buildGrid(); buildSidebarNav(); });
+// Grid and sidebar are now built after auth resolves (see auth block above)
 
 function openModule(mod) {
   currentModule = mod;
@@ -2287,6 +2295,7 @@ let currentView = 'home'; // 'home', 'kompass', 'module'
 
 function showMainContent() {
   document.getElementById('mainContent').style.display = 'flex';
+  document.getElementById('moduleSelect').style.display = 'flex';
   document.getElementById('chatInterface').style.display = 'none';
   document.getElementById('kompassInterface').style.display = 'none';
 }
