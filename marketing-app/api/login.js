@@ -1,17 +1,4 @@
-// USERS env var format (JSON array):
-// [{"email":"max@beispiel.de","password":"geheim123"},{"email":"anna@firma.de","password":"sicher456"}]
-//
-// In Vercel: Settings → Environment Variables → USERS → JSON einfügen
-
-function getUsers() {
-  try {
-    return JSON.parse(process.env.USERS || '[]');
-  } catch {
-    return [];
-  }
-}
-
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { email, password } = req.body;
@@ -20,13 +7,24 @@ export default function handler(req, res) {
     return res.status(400).json({ error: 'Ungültige Email.' });
   }
 
-  const users = getUsers();
   const normalizedEmail = email.toLowerCase().trim();
-  const user = users.find(
-    u => u.email.toLowerCase() === normalizedEmail && u.password === password
+
+  const r = await fetch(
+    `${process.env.SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(normalizedEmail)}&select=email,password&limit=1`,
+    {
+      headers: {
+        'apikey': process.env.SUPABASE_SERVICE_KEY,
+        'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_KEY}`
+      }
+    }
   );
 
-  if (!user) {
+  if (!r.ok) return res.status(500).json({ error: 'Datenbankfehler.' });
+
+  const rows = await r.json();
+  const user = rows[0];
+
+  if (!user || user.password !== password) {
     return res.status(401).json({ error: 'Email oder Passwort falsch.' });
   }
 
