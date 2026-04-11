@@ -2,34 +2,25 @@
 // GET  → prüft ob User das Video gesehen hat
 // POST → markiert Video als gesehen (mit Zeitstempel)
 
-function getEmailFromSession(req) {
-  const cookieHeader = req.headers.cookie || '';
-  const match = cookieHeader.split(';').map(c => c.trim()).find(c => c.startsWith('session='));
-  if (!match) return null;
-
-  const token = match.slice('session='.length);
-  try {
-    const [payload, sig] = token.split('.');
-    const secret = process.env.SESSION_SECRET || 'fallback-secret';
-    const expected = require('crypto').createHmac('sha256', secret).update(payload).digest('hex');
-    if (sig !== expected) return null;
-    const { email } = JSON.parse(Buffer.from(payload, 'base64').toString());
-    return email || null;
-  } catch {
-    return null;
-  }
+function getEmailFromRequest(req) {
+  const cookie = req.headers.cookie || '';
+  const cookies = Object.fromEntries(
+    cookie.split(';').map(c => {
+      const [k, ...v] = c.trim().split('=');
+      return [k, decodeURIComponent(v.join('='))];
+    })
+  );
+  const sessionValid = cookies['mk_session'] === process.env.SESSION_SECRET;
+  if (!sessionValid) return null;
+  return cookies['mk_user_email'] || null;
 }
 
 export default async function handler(req, res) {
-  const email = getEmailFromSession(req);
+  const email = getEmailFromRequest(req);
   if (!email) return res.status(401).json({ error: 'Nicht eingeloggt' });
 
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
-
-  if (!supabaseUrl || !supabaseKey) {
-    return res.status(500).json({ error: 'Supabase nicht konfiguriert' });
-  }
 
   const headers = {
     'Content-Type': 'application/json',
