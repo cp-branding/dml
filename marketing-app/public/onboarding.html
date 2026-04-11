@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Willkommen · Marketing-Kurs</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #0f0f13;
+      color: #f0f0f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    #loading-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      color: #5a5a7a;
+      font-size: 14px;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #2e2e42;
+      border-top-color: #6c63ff;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #main-card {
+      display: none;
+      background: #1a1a24;
+      border: 1px solid #2e2e42;
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 760px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ff6b00;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+
+    h1 { font-size: 26px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+
+    .subtitle {
+      color: #9090a8;
+      font-size: 15px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .must-watch {
+      background: linear-gradient(135deg, #ff6b0022, #ff6b0011);
+      border: 1px solid #ff6b0055;
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+    .must-watch .icon { font-size: 24px; flex-shrink: 0; }
+    .must-watch strong { display: block; color: #ff8c3a; font-size: 14px; margin-bottom: 2px; }
+    .must-watch span { color: #b0b0c8; font-size: 13px; line-height: 1.5; }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 28px;
+      border: 1px solid #2e2e42;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    .confirm-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #12121a;
+      border: 1px solid #2e2e42;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .confirm-row:hover { border-color: #5555aa; }
+    .confirm-row input[type="checkbox"] {
+      width: 18px; height: 18px;
+      margin-top: 2px;
+      accent-color: #6c63ff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .confirm-row label {
+      font-size: 14px;
+      color: #c0c0d8;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+    .confirm-row label strong { color: #f0f0f0; }
+
+    .cta-btn {
+      width: 100%;
+      padding: 15px 24px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .25s;
+      background: #2e2e42;
+      color: #5a5a7a;
+      pointer-events: none;
+    }
+    .cta-btn.active {
+      background: linear-gradient(135deg, #6c63ff, #a855f7);
+      color: white;
+      pointer-events: auto;
+      box-shadow: 0 6px 24px rgba(108,99,255,0.4);
+    }
+    .cta-btn.active:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(108,99,255,0.5);
+    }
+    .cta-btn.loading { opacity: .6; pointer-events: none; }
+
+    .hint { margin-top: 14px; font-size: 12px; color: #55556a; }
+    .error-msg { color: #ff6b6b; font-size: 13px; margin-top: 10px; display: none; }
+  </style>
+</head>
+<body>
+
+<div id="loading-screen">
+  <div class="spinner"></div>
+  <span>Einen Moment…</span>
+</div>
+
+<div id="main-card">
+  <div class="badge">🎬 Pflicht-Video</div>
+  <h1>Bevor es losgeht — schau dieses Video</h1>
+  <p class="subtitle">
+    Es erklärt dir, wie der Kurs aufgebaut ist und was du mitbringen solltest.<br>
+    Erst danach kannst du in die App einsteigen.
+  </p>
+
+  <div class="must-watch">
+    <div class="icon">⚠️</div>
+    <div>
+      <strong>Dieses Video ist Pflicht</strong>
+      <span>Schau es vollständig an — der Weiter-Button wird erst nach deiner Bestätigung aktiv.</span>
+    </div>
+  </div>
+
+  <!-- ✏️ HIER deine YouTube-Video-ID eintragen (nach ?v= in der URL) -->
+  <div class="video-wrapper">
+    <iframe
+      src="https://www.youtube.com/embed/DEINE_VIDEO_ID?rel=0&modestbranding=1"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <label class="confirm-row" for="watched-cb">
+    <input type="checkbox" id="watched-cb" onchange="toggleBtn()" />
+    <label for="watched-cb">
+      <strong>Ich habe das Video vollständig angesehen</strong><br>
+      und bin bereit, mit dem Kurs zu starten.
+    </label>
+  </label>
+
+  <button class="cta-btn" id="continue-btn" onclick="markAndContinue()">
+    Zum Kurs →
+  </button>
+  <p class="error-msg" id="error-msg">Fehler beim Speichern — bitte nochmal versuchen.</p>
+  <p class="hint">Du siehst diesen Schritt nur einmal.</p>
+</div>
+
+<script>
+  async function init() {
+    // 1. Auth prüfen
+    const authRes = await fetch('/api/auth');
+    if (!authRes.ok) { window.location.href = '/login.html'; return; }
+
+    // 2. Supabase: Video schon gesehen?
+    const statusRes = await fetch('/api/video-status');
+    if (statusRes.ok) {
+      const { seen } = await statusRes.json();
+      if (seen) { window.location.href = '/marketing-kurs-komplett.html'; return; }
+    }
+
+    // 3. Onboarding anzeigen
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('main-card').style.display = 'block';
+  }
+
+  init();
+
+  function toggleBtn() {
+    const btn = document.getElementById('continue-btn');
+    btn.classList.toggle('active', document.getElementById('watched-cb').checked);
+  }
+
+  async function markAndContinue() {
+    if (!document.getElementById('watched-cb').checked) return;
+
+    const btn = document.getElementById('continue-btn');
+    btn.classList.remove('active');
+    btn.classList.add('loading');
+    btn.textContent = 'Wird gespeichert…';
+
+    const res = await fetch('/api/video-status', { method: 'POST' });
+
+    if (!res.ok) {
+      btn.classList.remove('loading');
+      btn.classList.add('active');
+      btn.textContent = 'Zum Kurs →';
+      document.getElementById('error-msg').style.display = 'block';
+      return;
+    }
+
+    window.location.href = '/marketing-kurs-komplett.html';
+  }
+</script>
+
+</body>
+</html>
