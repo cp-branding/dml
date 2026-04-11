@@ -239,7 +239,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value.trim();
   const pw = document.getElementById('password').value;
 
-  // Basic email validation
   if (!email || !email.includes('@')) {
     err.textContent = 'Bitte eine gültige Email eingeben.';
     err.classList.add('show');
@@ -259,7 +258,9 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     });
 
     if (res.ok) {
-      window.location.href = '/';
+      const data = await res.json();
+      // ✅ Redirect aus API-Antwort nutzen (→ /onboarding.html)
+      window.location.href = data.redirect || '/';
     } else {
       err.textContent = 'Email oder Passwort falsch. Nochmal.';
       err.classList.add('show');
