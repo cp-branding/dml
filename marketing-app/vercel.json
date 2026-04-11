@@ -1,11 +1,15 @@
 {
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/login.html", "destination": "/public/login.html" },
+    { "source": "/(.*)", "destination": "/public/$1" }
+  ],
+  "headers": [
     {
-      "source": "/",
-      "has": [{ "type": "cookie", "key": "mk_session" }],
-      "destination": "/marketing-kurs-komplett.html"
-    },
-    { "source": "/login", "destination": "/login.html" },
-    { "source": "/", "destination": "/login.html" }
+      "source": "/(marketing-kurs-komplett|problem-kompass|onboarding).html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
   ]
 }
