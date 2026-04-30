@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digitales Marketing Lernen · Datenschutz</title>
+<link rel="icon" type="image/png" href="/dml_favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --accent: #E8451A;
+  --accent2: #F07530;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --light: #9ca3af;
+  --border: rgba(200,210,240,0.5);
+  --glass: rgba(255,255,255,0.85);
+  --radius: 18px;
+  --radius-sm: 11px;
+}
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(145deg, #fdf0ec 0%, #fce8e0 50%, #fdf5f0 100%);
+  min-height: 100vh; color: var(--text);
+  padding: clamp(20px, 5vw, 48px); line-height: 1.6;
+}
+body::before {
+  content: ''; position: fixed; top: -20%; left: -10%;
+  width: 55%; height: 55%;
+  background: radial-gradient(circle, rgba(232,69,26,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+.wrap {
+  max-width: 820px; margin: 0 auto;
+  background: var(--glass);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.9);
+  border-radius: var(--radius);
+  padding: clamp(28px, 5vw, 48px);
+  position: relative; z-index: 1;
+}
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.brand img { height: 28px; width: auto; }
+.brand-name { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 1.0625rem; letter-spacing: -0.01em; }
+h1 {
+  font-family: 'Fraunces', Georgia, serif; font-weight: 600;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  letter-spacing: -0.02em; margin-bottom: 6px;
+}
+.subline { color: var(--muted); font-size: 0.9375rem; margin-bottom: 24px; }
+h2 {
+  font-size: 0.75rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--accent); margin-top: 36px; margin-bottom: 10px;
+}
+h3 {
+  font-size: 1rem; font-weight: 600;
+  margin-top: 18px; margin-bottom: 8px; color: var(--text);
+}
+p, li { font-size: 0.9375rem; line-height: 1.65; margin-bottom: 12px; color: var(--text); }
+ul, ol { margin-left: 1.4em; margin-bottom: 12px; }
+li { margin-bottom: 6px; }
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+a:hover { color: var(--accent2); }
+.placeholder {
+  background: rgba(232,69,26,0.10); border: 1px dashed var(--accent);
+  padding: 2px 8px; border-radius: 4px; color: var(--accent);
+  font-size: 0.9375rem;
+}
+.toc {
+  background: rgba(232,69,26,0.05); border-left: 3px solid var(--accent);
+  padding: 14px 20px; margin-bottom: 28px; border-radius: var(--radius-sm);
+}
+.toc strong {
+  display: block; font-size: 0.6875rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--accent); margin-bottom: 6px;
+}
+.toc ol { margin-left: 1.4em; margin-bottom: 0; }
+.toc li { margin-bottom: 3px; font-size: 0.9375rem; }
+.toc a { color: var(--text); text-decoration: none; }
+.toc a:hover { color: var(--accent); text-decoration: underline; }
+table.processors { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.9375rem; }
+table.processors th, table.processors td {
+  border: 1px solid rgba(232,69,26,0.2);
+  padding: 10px 12px; text-align: left; vertical-align: top;
+}
+table.processors th {
+  background: rgba(232,69,26,0.07); color: var(--accent);
+  font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+}
+.account-actions {
+  margin: 18px 0 24px;
+  padding: 16px 20px;
+  background: rgba(232,69,26,0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+}
+.account-actions-title {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.account-actions-hint { font-size: 0.9375rem; margin-bottom: 14px; color: var(--text); }
+.account-actions-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn-secondary, .btn-danger {
+  flex: 1 1 240px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.btn-secondary { background: var(--accent); color: #fff; }
+.btn-secondary:hover { background: var(--accent2); }
+.btn-danger { background: #C0392B; color: #fff; }
+.btn-danger:hover { background: #E74C3C; }
+.btn-secondary[disabled], .btn-danger[disabled] { opacity: 0.6; cursor: progress; }
+.account-actions-status { margin-top: 12px; font-size: 0.875rem; color: var(--accent); min-height: 1.4em; }
+.account-actions-status.error { color: #C0392B; }
+.account-actions-loginhint {
+  color: var(--muted); font-size: 0.875rem; margin: 0 0 24px;
+}
+.account-actions:not([hidden]) ~ #loginHint { display: none; }
+.footer {
+  margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--border);
+  text-align: center; color: var(--muted); font-size: 0.875rem;
+}
+.legal-nav {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 14px; margin-top: 16px; font-size: 0.875rem;
+}
+.legal-nav a { color: var(--muted); text-decoration: none; }
+.legal-nav a:hover { color: var(--accent); text-decoration: underline; }
+.legal-nav .sep { color: rgba(232,69,26,0.4); }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="brand">
+    <img src="/dml_wordmark.png" alt="DML">
+    <span class="brand-name">Digitales Marketing Lernen</span>
+  </div>
+
+  <h1>Datenschutzerklärung</h1>
+  <p class="subline">
+    Diese Erklärung beschreibt, wie ich (Constantin Pechel, CP Branding) personenbezogene Daten beim Betrieb des Online-Kurses
+    „Digitales Marketing Lernen" (DML) verarbeite. Es gelten die Vorgaben der DSGVO und des BDSG.
+  </p>
+
+  <div class="toc">
+    <strong>Übersicht</strong>
+    <ol>
+      <li><a href="#verantwortlicher">Verantwortlicher</a></li>
+      <li><a href="#rechte">Deine Rechte</a></li>
+      <li><a href="#zwecke">Verarbeitungszwecke und Rechtsgrundlagen</a></li>
+      <li><a href="#empfaenger">Empfänger / Auftragsverarbeiter</a></li>
+      <li><a href="#cookies">Cookies und lokale Speicherung</a></li>
+      <li><a href="#speicherdauer">Speicherdauer</a></li>
+      <li><a href="#sicherheit">Sicherheit und Beta-Hinweis</a></li>
+      <li><a href="#aenderungen">Änderungen dieser Erklärung</a></li>
+    </ol>
+  </div>
+
+  <h2 id="verantwortlicher">1. Verantwortlicher</h2>
+  <p>
+    Constantin Pechel, CP Branding (Einzelunternehmen)<br>
+    <span class="placeholder">[STRAßE HAUSNR]</span>, <span class="placeholder">[PLZ ORT]</span>, Deutschland<br>
+    E-Mail: <a href="mailto:constantin@cp-branding.de">constantin@cp-branding.de</a>
+  </p>
+  <p>
+    Ein Datenschutzbeauftragter ist nicht bestellt — die gesetzlichen Schwellen (§ 38 BDSG) werden nicht erreicht.
+  </p>
+
+  <h2 id="rechte">2. Deine Rechte</h2>
+  <p>Du hast nach DSGVO folgende Rechte:</p>
+  <ul>
+    <li><strong>Auskunft</strong> über die zu deiner Person gespeicherten Daten (Art. 15)</li>
+    <li><strong>Berichtigung</strong> unrichtiger Daten (Art. 16)</li>
+    <li><strong>Löschung</strong> deiner Daten (Art. 17), soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen</li>
+    <li><strong>Einschränkung der Verarbeitung</strong> (Art. 18)</li>
+    <li><strong>Datenübertragbarkeit</strong> in einem strukturierten, gängigen, maschinenlesbaren Format (Art. 20)</li>
+    <li><strong>Widerspruch</strong> gegen die Verarbeitung, soweit sie auf einem berechtigten Interesse beruht (Art. 21)</li>
+    <li><strong>Widerruf</strong> einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3)</li>
+  </ul>
+  <p>
+    Schick deine Anfrage formlos an <a href="mailto:constantin@cp-branding.de">constantin@cp-branding.de</a>.
+    Du hast außerdem das Recht, dich bei der zuständigen Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77).
+  </p>
+
+  <div class="account-actions" id="accountActions" hidden>
+    <strong class="account-actions-title">Selbstbedienung (nur eingeloggt):</strong>
+    <p class="account-actions-hint">
+      Du kannst deine Daten direkt herunterladen oder dein Konto inkl. aller gespeicherten Daten unwiderruflich löschen.
+      Hinweis: Da DML und der Marketing-Copilot dieselbe Nutzerbasis teilen, betrifft die Löschung auch Daten im Copilot.
+    </p>
+    <div class="account-actions-row">
+      <button type="button" id="exportBtn" class="btn-secondary">Daten exportieren (JSON)</button>
+      <button type="button" id="deleteBtn" class="btn-danger">Konto löschen</button>
+    </div>
+    <p id="actionStatus" class="account-actions-status" role="status" aria-live="polite"></p>
+  </div>
+  <p id="loginHint" class="account-actions-loginhint">
+    Hinweis: Wenn du eingeloggt bist, erscheinen hier zusätzlich Buttons zum direkten Datenexport und zur Konto-Löschung.
+    <a href="/login">Zum Login</a>.
+  </p>
+
+  <h2 id="zwecke">3. Verarbeitungszwecke und Rechtsgrundlagen</h2>
+
+  <h3>3.1 Account und Login</h3>
+  <p>
+    Bei der Registrierung und beim Login werden deine E-Mail-Adresse und ein von dir gewähltes Passwort verarbeitet.
+    Daraus wird ein Sitzungs-Cookie erzeugt, damit du eingeloggt bleibst.
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).
+  </p>
+
+  <h3>3.2 KI-Chat im Kurs</h3>
+  <p>
+    Während der Module des Kurses kannst du Fragen an einen KI-Assistenten (derzeit Anthropic Claude) stellen.
+    Deine Fragen und der Modul-Kontext werden zur Beantwortung an die KI-Schnittstelle in den USA übermittelt.
+    Antworten werden zusammen mit dem Verlauf in deinem Account gespeichert, damit du im Modul weiterarbeiten kannst.
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).
+  </p>
+
+  <h3>3.3 Modul-Fortschritt</h3>
+  <p>
+    Damit du deinen Fortschritt im Kurs zwischen Sitzungen behalten kannst, werden pro Modul gespeichert:
+    Modul-ID, Anzahl beantworteter Fragen, optionale Zusammenfassung, Chat-Verlauf, Status des Onboarding-Videos.
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).
+  </p>
+
+  <h3>3.4 Server-Logs</h3>
+  <p>
+    Beim Abruf werden technisch notwendige Daten (IP-Adresse, Datum/Uhrzeit, User-Agent, Status) verarbeitet,
+    um den Dienst stabil und sicher zu betreiben (Fehlerdiagnose, Missbrauchserkennung).
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem stabilen, sicheren Betrieb).
+  </p>
+
+  <h3>3.5 Sicherheitsprotokoll (Auth-Log)</h3>
+  <p>
+    Zur Erkennung und Abwehr von Missbrauch (z.&nbsp;B. Brute-Force-Angriffe, Account-Übernahme-Versuche, Rate-Limit-Missbrauch)
+    protokolliere ich folgende Auth-Ereignisse in einer separaten Tabelle:
+    erfolgreiche/fehlgeschlagene Logins, Logouts, Sperrungen wegen zu vieler Fehlversuche und wegen erreichtem Tageslimit, Konto-Löschungen.
+    Pro Eintrag werden gespeichert: Ereignis-Typ, deine E-Mail, IP-Adresse, User-Agent (gekürzt auf 500 Zeichen), Zeitstempel.
+    Diese Einträge werden nach <strong>30 Tagen</strong> automatisch gelöscht.
+  </p>
+  <p>
+    Daneben bestehen zwei kurze technische Hilfstabellen für Brute-Force-Schutz und für die KI-Tagesbegrenzung.
+    Einträge dort werden nach <strong>24 Stunden</strong> entwertet bzw. gelöscht.
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Du hast das Recht zum Widerspruch gemäß Art. 21 DSGVO.
+  </p>
+
+  <h2 id="empfaenger">4. Empfänger / Auftragsverarbeiter</h2>
+  <p>
+    Folgende Dienstleister verarbeiten Daten in meinem Auftrag.
+    Soweit Daten in Drittländer (insbesondere die USA) übermittelt werden, geschieht dies auf Grundlage der EU-Standardvertragsklauseln (SCCs).
+  </p>
+  <table class="processors">
+    <thead>
+      <tr>
+        <th>Anbieter</th>
+        <th>Zweck</th>
+        <th>Sitz / Übermittlung</th>
+        <th>Status AVV/DPA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Anthropic, PBC</td>
+        <td>KI-Modell für Chat-Antworten in den Modulen</td>
+        <td>USA, SCCs</td>
+        <td><span class="placeholder">[AVV abgeschlossen am: TT.MM.JJJJ]</span></td>
+      </tr>
+      <tr>
+        <td>Supabase, Inc.</td>
+        <td>Datenbank (Account, Modul-Fortschritt, Chat-Verlauf)</td>
+        <td>USA / EU-Region möglich, SCCs</td>
+        <td><span class="placeholder">[DPA aktiviert: ja/nein]</span></td>
+      </tr>
+      <tr>
+        <td>Vercel, Inc.</td>
+        <td>Hosting der Web-App und der API-Endpunkte</td>
+        <td>USA, SCCs</td>
+        <td><span class="placeholder">[DPA aktiviert: ja/nein]</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Anthropic verwendet API-Eingaben nach aktuellem Anbieter-Hinweis nicht zum Trainieren ihrer Modelle.
+    Aktueller Stand: <a href="https://www.anthropic.com/legal" target="_blank" rel="noopener noreferrer">anthropic.com/legal</a>.
+  </p>
+
+  <h2 id="cookies">5. Cookies und lokale Speicherung</h2>
+  <p>
+    Es werden ausschließlich technisch notwendige Cookies gesetzt — keine Tracking- oder Analyse-Cookies, keine Drittanbieter-Pixel.
+  </p>
+  <ul>
+    <li><strong>mk_auth</strong> — signiertes Sitzungstoken (HttpOnly, Secure, SameSite=Strict). Enthält deine E-Mail und einen kryptografischen Fingerabdruck (HMAC-SHA-256), damit der Server prüfen kann, ob das Cookie unverändert ist. Speicherdauer: 30 Tage oder bis zum Logout.</li>
+    <li><strong>localStorage / sessionStorage</strong> — wird genutzt, um Onboarding-Status und Module-Position lokal im Browser zu merken.</li>
+  </ul>
+  <p>Du kannst Cookies in deinem Browser jederzeit löschen — danach musst du dich erneut anmelden.</p>
+
+  <h2 id="speicherdauer">6. Speicherdauer</h2>
+  <ul>
+    <li><strong>Account-Daten</strong> (E-Mail, Passwort-Hash): bis zur Löschung deines Kontos durch dich.</li>
+    <li><strong>Modul-Fortschritt, Chat-Verlauf, Video-Status</strong>: bis zur Löschung durch dich.</li>
+    <li><strong>Server-Logs</strong>: in der Regel 14 Tage.</li>
+    <li><strong>Sicherheitsprotokoll (Auth-Log)</strong>: 30 Tage nach Erstellung des Eintrags.</li>
+    <li><strong>Brute-Force-Schutz und KI-Tageslimit</strong>: 24 Stunden nach Erstellung des Eintrags.</li>
+  </ul>
+
+  <h2 id="sicherheit">7. Sicherheit und Beta-Hinweis</h2>
+  <p>
+    DML befindet sich aktuell im Testbetrieb mit ausgewählten Tester:innen.
+    Bitte gib während dieser Phase keine besonderen Kategorien personenbezogener Daten (Art. 9 DSGVO — z.&nbsp;B. Gesundheitsdaten)
+    und keine geschäftskritischen Geheimnisse ein.
+  </p>
+
+  <h2 id="aenderungen">8. Änderungen dieser Erklärung</h2>
+  <p>
+    Bei Änderungen wird das Datum unten aktualisiert. Bei wesentlichen Änderungen (neue Empfänger, neue Verarbeitungszwecke)
+    wirst du per E-Mail an die im Account hinterlegte Adresse informiert.
+  </p>
+
+  <div class="footer">
+    Stand: 30.04.2026 · <a href="/">Zurück</a>
+    <nav class="legal-nav" aria-label="Rechtliche Seiten">
+      <a href="/impressum">Impressum</a><span class="sep">·</span>
+      <a href="/datenschutz">Datenschutz</a><span class="sep">·</span>
+      <a href="/agb">AGB</a>
+    </nav>
+  </div>
+</main>
+
+<script>
+(async () => {
+  let authed = false;
+  try {
+    const r = await fetch('/api/auth', { credentials: 'same-origin' });
+    authed = r.ok && (await r.json()).authenticated === true;
+  } catch {}
+  if (authed) {
+    document.getElementById('accountActions').hidden = false;
+    document.getElementById('loginHint').style.display = 'none';
+  }
+})();
+
+const status = document.getElementById('actionStatus');
+function setStatus(msg, isError = false) {
+  status.textContent = msg;
+  status.classList.toggle('error', isError);
+}
+
+document.getElementById('exportBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('exportBtn');
+  btn.disabled = true;
+  setStatus('Erstelle Export …');
+  try {
+    const r = await fetch('/api/account', { credentials: 'same-origin' });
+    if (!r.ok) throw new Error('Server-Fehler ' + r.status);
+    const blob = await r.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const cd = r.headers.get('Content-Disposition') || '';
+    const m = cd.match(/filename="([^"]+)"/);
+    a.download = m ? m[1] : 'dml-export.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    setStatus('Export heruntergeladen.');
+  } catch (e) {
+    setStatus('Export fehlgeschlagen: ' + (e?.message || e), true);
+  } finally { btn.disabled = false; }
+});
+
+document.getElementById('deleteBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('deleteBtn');
+  if (!confirm('Wirklich Konto und alle Daten unwiderruflich löschen?\n\nAlle Modul-Fortschritte, Chats, Sessions und der Account selbst werden gelöscht. Das gilt auch im Marketing-Copilot (geteilte Nutzerbasis).')) return;
+  const typed = prompt('Zur Bestätigung tippe LÖSCHEN ein:');
+  if (typed !== 'LÖSCHEN') { setStatus('Abgebrochen.', true); return; }
+  btn.disabled = true; setStatus('Lösche Konto …');
+  try {
+    const r = await fetch('/api/account', { method: 'DELETE', credentials: 'same-origin' });
+    if (r.ok) {
+      setStatus('Konto gelöscht. Du wirst ausgeloggt.');
+      setTimeout(() => { window.location.href = '/login'; }, 1500);
+    } else if (r.status === 207) {
+      const j = await r.json().catch(() => ({}));
+      setStatus('Teilweise gelöscht. Bitte per E-Mail melden: constantin@cp-branding.de. Detail: ' + JSON.stringify(j.errors || []), true);
+    } else {
+      setStatus('Löschung fehlgeschlagen: Server-Fehler ' + r.status, true);
+      btn.disabled = false;
+    }
+  } catch (e) {
+    setStatus('Löschung fehlgeschlagen: ' + (e?.message || e), true);
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

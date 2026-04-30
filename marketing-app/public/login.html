@@ -193,9 +193,67 @@ button[type="submit"]:disabled {
   text-align: center;
   line-height: 1.6;
 }
+
+/* Beta-Banner — fixed oben, dismissable */
+.beta-banner {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center; justify-content: space-between; gap: 12px;
+  padding: 9px clamp(12px, 3vw, 20px);
+  background: #FFE5D5;
+  color: var(--text);
+  border-bottom: 1px solid rgba(232,69,26,0.4);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.beta-banner.on { display: flex; }
+.beta-banner .label {
+  font-size: 10px; letter-spacing: 0.1em; font-weight: 600;
+  background: var(--accent); color: #fff;
+  padding: 3px 8px; border-radius: 4px; flex-shrink: 0;
+}
+.beta-banner .text { flex: 1; min-width: 0; }
+.beta-banner a { color: var(--accent); text-decoration: underline; font-weight: 600; }
+.beta-banner .close {
+  background: var(--accent); color: #fff; border: none; cursor: pointer;
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  font-size: 12px; border-radius: 4px; flex-shrink: 0;
+}
+
+/* Consent-Checkbox */
+label.consent {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin: 4px 0 16px;
+  font-size: 13px; line-height: 1.45; color: var(--text);
+  text-transform: none; letter-spacing: normal; font-weight: 400;
+}
+.consent input[type="checkbox"] {
+  width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
+  accent-color: var(--accent);
+}
+.consent a { color: var(--accent); text-decoration: underline; }
+
+/* Legal-Links */
+.legal-nav {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 12px; margin-top: 14px;
+  font-size: 12px;
+}
+.legal-nav a { color: var(--muted); text-decoration: none; }
+.legal-nav a:hover { color: var(--accent); text-decoration: underline; }
+.legal-nav .sep { color: rgba(232,69,26,0.4); }
 </style>
 </head>
 <body>
+
+<!-- Beta-Banner — sichtbar bis dismissed -->
+<div class="beta-banner" id="betaBanner" role="status" aria-live="polite">
+  <span class="label">BETA</span>
+  <span class="text">Dieser Kurs befindet sich im Testbetrieb. Bitte keine sensiblen oder geschäftskritischen Daten eingeben. Mehr in der <a href="/datenschutz">Datenschutzerklärung</a>.</span>
+  <button class="close" id="betaClose" aria-label="Hinweis schließen">×</button>
+</div>
 
 <div class="card">
   <div class="logo">
@@ -224,14 +282,41 @@ button[type="submit"]:disabled {
       placeholder="••••••••"
       autocomplete="current-password"
     />
+    <label class="consent" for="consent">
+      <input type="checkbox" id="consent" required>
+      <span>Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> und die <a href="/agb">AGB</a> gelesen und akzeptiere sie.</span>
+    </label>
+
     <button type="submit" id="submitBtn">Rein →</button>
     <div class="error" id="errorMsg">Email oder Passwort falsch. Nochmal.</div>
   </form>
 
   <p class="footer-note">Du hast kein Passwort?<br>Meld dich bei Constantin.</p>
+
+  <nav class="legal-nav" aria-label="Rechtliche Seiten">
+    <a href="/impressum">Impressum</a><span class="sep">·</span>
+    <a href="/datenschutz">Datenschutz</a><span class="sep">·</span>
+    <a href="/agb">AGB</a>
+  </nav>
 </div>
 
 <script>
+// Beta-Banner — Anzeige + Dismiss mit 14-Tage-Re-Show
+(function () {
+  const KEY = 'dml_beta_banner_dismissed_at';
+  const RE_SHOW_MS = 14 * 24 * 60 * 60 * 1000;
+  const banner = document.getElementById('betaBanner');
+  const close = document.getElementById('betaClose');
+  if (!banner || !close) return;
+  let dismissedAt = 0;
+  try { dismissedAt = parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch {}
+  if (Date.now() - dismissedAt > RE_SHOW_MS) banner.classList.add('on');
+  close.addEventListener('click', () => {
+    banner.classList.remove('on');
+    try { localStorage.setItem(KEY, String(Date.now())); } catch {}
+  });
+})();
+
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
@@ -239,6 +324,12 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value.trim();
   const pw = document.getElementById('password').value;
 
+  if (!document.getElementById('consent').checked) {
+    err.textContent = 'Bitte Datenschutz und AGB bestätigen.';
+    err.classList.add('show');
+    document.getElementById('consent').focus();
+    return;
+  }
   if (!email || !email.includes('@')) {
     err.textContent = 'Bitte eine gültige Email eingeben.';
     err.classList.add('show');
@@ -261,6 +352,12 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
       const data = await res.json();
       // ✅ Redirect aus API-Antwort nutzen (→ /onboarding.html)
       window.location.href = data.redirect || '/';
+    } else if (res.status === 429) {
+      const data = await res.json().catch(() => ({}));
+      err.textContent = data.message || 'Zu viele Fehlversuche. Bitte später erneut versuchen.';
+      err.classList.add('show');
+      btn.disabled = false;
+      btn.textContent = 'Rein →';
     } else {
       err.textContent = 'Email oder Passwort falsch. Nochmal.';
       err.classList.add('show');

@@ -2,21 +2,10 @@
 // GET  → prüft ob User das Video gesehen hat
 // POST → markiert Video als gesehen (mit Zeitstempel)
 
-function getEmailFromRequest(req) {
-  const cookie = req.headers.cookie || '';
-  const cookies = Object.fromEntries(
-    cookie.split(';').map(c => {
-      const [k, ...v] = c.trim().split('=');
-      return [k, decodeURIComponent(v.join('='))];
-    })
-  );
-  const sessionValid = cookies['mk_session'] === process.env.SESSION_SECRET;
-  if (!sessionValid) return null;
-  return cookies['mk_user_email'] || null;
-}
+import { getAuthedEmail } from './_auth.js';
 
 export default async function handler(req, res) {
-  const email = getEmailFromRequest(req);
+  const email = getAuthedEmail(req);
   if (!email) return res.status(401).json({ error: 'Nicht eingeloggt' });
 
   const supabaseUrl = process.env.SUPABASE_URL;
